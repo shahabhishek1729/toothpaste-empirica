@@ -1,0 +1,3 @@
+[submodule "prisonersDilemmaDemo"]
+	path = prisonersDilemmaDemo
+	url = ./prisonersDilemmaDemo/
