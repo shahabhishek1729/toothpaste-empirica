@@ -1,0 +1,28 @@
+factors:
+  - desc: playerCount determines the number of Players are in a Game.
+    name: playerCount
+    values:
+      - value: 1
+      - value: 2
+      - value: 3
+      - value: 5
+      - value: 8
+      - value: 13
+  - desc: number of rounds to play in the Game
+    name: numRounds
+    values:
+      - value: 1
+      - value: 2
+      - value: 10
+
+treatments:
+  - desc: "Two-player Game"
+    factors:
+      playerCount: 2
+      numRounds: 1
+    name: Two Players
+  - desc: "Two-player 10-round Game"
+    factors:
+      playerCount: 2
+      numRounds: 10
+    name: Two Players - Long
