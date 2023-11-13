@@ -11,7 +11,7 @@ import {
   import React, { useState, useEffect } from "react";
 
   
-
+  //const [utilityPreferences, setutilityPreferences] = useState([0,0,0]);
 
   export function Endowment(){
     const player = usePlayer() //this hook call will define 'player'
@@ -19,6 +19,7 @@ import {
     function onChange(e) {
         setSliderValue(e.target.value)
         setRemainingEndowmentPoints(startingEndowmentPoints - e.target.value)
+        player.round.set("guess")
       }
 
 
@@ -29,15 +30,30 @@ import {
 
     return(
         <div>
-            
-            <h1>Endowment page</h1>
+            <br /><br /><br />
+            <h1><b>Endowment page</b></h1>
+            <br></br>
+            <br></br>
 
-            <p>You will now select your quality preferences (utility funciton) for toothspase. Using your <b>10</b> endowment points.</p>
-            
-            <p>Select how to spend your endowment points here.</p>
-            <p>You currently have <b>{remainingEndowmentPoints}</b> endowment points left</p>
+            <p>You will now select your quality preferences (utility funciton) for toothpaste. Using your <b>10</b> endowment points.</p>
+
+            <p>Select how to spend your endowment points here. <br/>You currently have <b>{remainingEndowmentPoints}</b> endowment points left.</p>
             <br></br><br></br>
 
+            <p><b> Your preference for durability for this product</b></p>
+
+            <div className="h-48 w-48 pb-6">
+                    <div
+                        className="h-full w-full bg-contain bg-center bg-no-repeat"
+                        style={{backgroundImage:"url(https://upload.wikimedia.org/wikipedia/commons/4/49/Toothpasteonbrush.jpg)",}}
+            alt="Jelly Beans Pile"
+            />
+            </div>
+            <br />
+            <b> Performance </b>
+            <br />
+            <br />
+            <br />
             <Slider
             value={sliderValue}
             onChange={onChange}
