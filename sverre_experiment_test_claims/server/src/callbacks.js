@@ -2,6 +2,13 @@ import { ClassicListenersCollector } from "@empirica/core/admin/classic";
 export const Empirica = new ClassicListenersCollector();
 
 Empirica.onGameStart(({ game }) => {
+
+  const round0 = game.addRound({
+    name: "Round 0 - Endowment",
+    task: "endowment_allocation",
+  });
+  round0.addStage({ name: "endowment_allocation_stage1", duration: 30000 });
+
   const round = game.addRound({
     name: "Round 1 - Jelly Beans",
     task: "jellybeans",

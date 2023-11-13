@@ -7,6 +7,7 @@ import { Loading } from "@empirica/core/player/react";
 import React from "react";
 import { Product } from "./examples/Product";
 import { MineSweeper } from "./examples/MineSweeper";
+import { Endowment } from "./examples/Endowment";
 
 export function Stage() {
   const player = usePlayer();
@@ -26,6 +27,9 @@ export function Stage() {
   }
 
   switch (round.get("task")) {
+    case "endowment_allocation":
+      console.log("Rendering Endowment component");
+      return <Endowment />
     case "jellybeans":
       return <Product />;
     case "minesweeper":
