@@ -4,11 +4,11 @@ import {
   usePlayers,
   useStage,
 } from "@empirica/core/player/classic/react";
-import React from "react";
+//import React from "react";
 import { Avatar } from "../components/Avatar";
 import { Button } from "../components/Button";
 import "../../node_modules/@empirica/core/dist/player-classic-react.css";
-
+import React, { useState, useEffect } from "react";
 const sliderSteps = {
   1: "Low",
   2: "Medium",
@@ -25,11 +25,32 @@ export function Product() {
   //   //player.round.set("guess", e.target.valueAsNumber);
   //   player.round.set("guess", newValue);
   // }
+  const [sliderLabel, setSliderLabel] = useState("");
 
   function handleChange(e) {
     const value = Number(e.target.value); // Convert to Number if necessary
     player.round.set("guess", value);
+    setSliderLabel(updateSliderLabel(value)); // Update the label when the slider changes
   }
+  //start
+  function updateSliderLabel(value) {
+    switch (value) {
+      case 1:
+        return "Low";
+      case 2:
+        return "Medium";
+      case 3:
+        return "High";
+      default:
+        return "";
+    }
+  }
+
+  useEffect(() => {
+    const guessValue = player.round.get("guess");
+    const newLabel = updateSliderLabel(guessValue);
+    setSliderLabel(newLabel);
+  }, [player.round.get("guess")]);
 
   function handleSubmit() {
     player.stage.set("submit", true);
@@ -81,6 +102,9 @@ export function Product() {
 
       {!isResultStage ? (
         <div>
+
+
+        <div>
         <Slider
             value={player.round.get("guess")}
             onChange={handleChange}
@@ -91,8 +115,25 @@ export function Product() {
             max={3}
             valueLabelDisplay="auto" // shows the label when the slider is active/hovered
           />
-        
-        
+        <p>Product quality slider. Value:</p>
+        <div>{sliderLabel}</div>
+        </div>
+        <div>
+        <Slider
+            value={player.round.get("guess")}
+            onChange={handleChange}
+            disabled={stage.get("name") !== "Answer"}
+            step={1} // assuming the slider supports step to move in increments
+            marks={Object.entries(sliderSteps).map(([value, label]) => ({ value: Number(value), label }))}
+            min={1}
+            max={3}
+            valueLabelDisplay="auto" // shows the label when the slider is active/hovered
+          />
+        <p>Product cost slider. Value:</p>
+        <div>{sliderLabel}</div>
+        </div>
+
+
         </div>
       ) : null}
 
