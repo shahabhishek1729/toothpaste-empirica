@@ -1,6 +1,5 @@
-version: v1.1.2
-sha: 5f44fbc
-build: "82"
-tag: v1.1.2
+version: v1.8.3
+sha: 885604c
+tag: v1.8.3
 branch: main
-time: "2023-03-06T09:23:18Z"
+time: "2023-10-15T06:24:53Z"

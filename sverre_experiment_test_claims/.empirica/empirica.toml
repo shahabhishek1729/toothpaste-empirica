@@ -1,9 +1,9 @@
-name = "prisonersDilemmaDemo"
+name = "default-experiment"
 
 [tajriba.auth]
-srtoken = "gEuJApLbvQbJuUgw"
+srtoken = "uOSDVKOZdXiqbEkC"
 
 [[tajriba.auth.users]]
 name = "Admin"
 username = "admin"
-password = "kncNKHsf"
+password = "CHAPwJHA"

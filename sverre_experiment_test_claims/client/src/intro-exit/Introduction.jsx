@@ -4,12 +4,16 @@ import { Button } from "../components/Button";
 export function Introduction({ next }) {
   return (
     <div className="mt-3 sm:mt-5 p-20">
-      <p>
-      <strong>Instruction:</strong>
-In this game, there are two roles: producers and consumers. You will be randomly assigned to one of these roles. <br />
-
-Producers will sell products and provide corresponding product information, while consumers will purchase products based on their own preferences and the product information provided.<br />
-      </p>
+      <h3 className="text-lg leading-6 font-medium text-gray-900">
+        Instruction One
+      </h3>
+      <div className="mt-2 mb-6">
+        <p className="text-sm text-gray-500">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam
+          laudantium explicabo pariatur iste dolorem animi vitae error totam. At
+          sapiente aliquam accusamus facere veritatis.
+        </p>
+      </div>
       <Button handleClick={next} autoFocus>
         <p>Next</p>
       </Button>
