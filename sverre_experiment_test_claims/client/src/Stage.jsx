@@ -5,7 +5,7 @@ import {
 } from "@empirica/core/player/classic/react";
 import { Loading } from "@empirica/core/player/react";
 import React from "react";
-import { JellyBeans } from "./examples/JellyBeans";
+import { Product } from "./examples/Product";
 import { MineSweeper } from "./examples/MineSweeper";
 
 export function Stage() {
@@ -27,7 +27,7 @@ export function Stage() {
 
   switch (round.get("task")) {
     case "jellybeans":
-      return <JellyBeans />;
+      return <Product />;
     case "minesweeper":
       return <MineSweeper />;
     default:

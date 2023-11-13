@@ -9,13 +9,26 @@ import { Avatar } from "../components/Avatar";
 import { Button } from "../components/Button";
 import "../../node_modules/@empirica/core/dist/player-classic-react.css";
 
-export function JellyBeans() {
+const sliderSteps = {
+  1: "Low",
+  2: "Medium",
+  3: "High",
+};
+
+export function Product() {
   const player = usePlayer();
   const players = usePlayers();
   const stage = useStage();
 
+  // function handleChange(e, newValue) {
+  //   //const guessValue = Object.keys(sliderSteps).find(key => sliderSteps[key] === newValue);
+  //   //player.round.set("guess", e.target.valueAsNumber);
+  //   player.round.set("guess", newValue);
+  // }
+
   function handleChange(e) {
-    player.round.set("guess", e.target.valueAsNumber);
+    const value = Number(e.target.value); // Convert to Number if necessary
+    player.round.set("guess", value);
   }
 
   function handleSubmit() {
@@ -61,18 +74,26 @@ export function JellyBeans() {
       <p>
         {isResultStage
           ? "Result"
-          : "Guess how many Jelly Beans are in the pile below."}
+          : "This product is toothpaste with features X, Y and Z. Select the quality and cost of your product."}
       </p>
 
       {jelly}
 
       {!isResultStage ? (
+        <div>
         <Slider
-          value={player.round.get("guess")}
-          onChange={handleChange}
-          disabled={stage.get("name") !== "Answer"}
-          max={2000}
-        />
+            value={player.round.get("guess")}
+            onChange={handleChange}
+            disabled={stage.get("name") !== "Answer"}
+            step={1} // assuming the slider supports step to move in increments
+            marks={Object.entries(sliderSteps).map(([value, label]) => ({ value: Number(value), label }))}
+            min={1}
+            max={3}
+            valueLabelDisplay="auto" // shows the label when the slider is active/hovered
+          />
+        
+        
+        </div>
       ) : null}
 
       <Button handleClick={handleSubmit} primary>
@@ -89,7 +110,7 @@ function JellyBeanPile() {
         className="h-full w-full bg-contain bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Gimbals-Jellybeans-Pile.jpg/512px-Gimbals-Jellybeans-Pile.jpg)",
+            "url(https://upload.wikimedia.org/wikipedia/commons/4/49/Toothpasteonbrush.jpg)",
         }}
         alt="Jelly Beans Pile"
       />
