@@ -4,23 +4,29 @@ export const Empirica = new ClassicListenersCollector();
 Empirica.onGameStart(({ game }) => {
 
   const round0 = game.addRound({
-    name: "Round 0 - Endowment",
-    task: "endowment_allocation",
+    name: "Advertise",
+    task: "advertise",
   });
-  round0.addStage({ name: "endowment_allocation_stage1", duration: 30000 });
+  round0.addStage({ name: "advertiseProduct", duration: 120 });
 
-  const round = game.addRound({
-    name: "Round 1 - Jelly Beans",
-    task: "jellybeans",
+  const round1 = game.addRound({
+    name: "Results",
+    task: "results",
   });
-  round.addStage({ name: "Answer", duration: 3000 });
-  round.addStage({ name: "Result", duration: 1200 });
+  round1.addStage({ name: "Result", duration: 45 });
 
   const round2 = game.addRound({
-    name: "Round 2 - Minesweeper",
-    task: "minesweeper",
+    name: "Advertise Again",
+    task: "advertiseAgain",
   });
-  round2.addStage({ name: "Play", duration: 300 });
+  round2.addStage({ name: "advertiseProduct", duration: 120 });
+  
+  const round3 = game.addRound({
+    name: "Game Results",
+    task: "gameResults",
+  });
+  round3.addStage({ name: "Result", duration: 45 });
+
 });
 
 Empirica.onRoundStart(({ round }) => {});

@@ -5,9 +5,8 @@ import {
 } from "@empirica/core/player/classic/react";
 import { Loading } from "@empirica/core/player/react";
 import React from "react";
-import { Product } from "./examples/Product";
-import { MineSweeper } from "./examples/MineSweeper";
-import { Endowment } from "./examples/Endowment";
+import { HighQualityAdvertisement } from "./examples/Advertise";
+import { SalesResults } from "./examples/Results";
 
 export function Stage() {
   const player = usePlayer();
@@ -27,13 +26,14 @@ export function Stage() {
   }
 
   switch (round.get("task")) {
-    case "endowment_allocation":
-      console.log("Rendering Endowment component");
-      return <Endowment />
-    case "jellybeans":
-      return <Product />;
-    case "minesweeper":
-      return <MineSweeper />;
+    case "advertise":
+      return < HighQualityAdvertisement />;
+    case "results":
+      return <SalesResults />;
+    case "advertiseAgain":
+      return <HighQualityAdvertisement />;    
+    case "gameResults":
+      return <SalesResults />;
     default:
       return <div>Unknown task</div>;
   }
