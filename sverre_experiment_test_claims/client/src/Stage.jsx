@@ -16,8 +16,7 @@ export function Stage() {
   if (player.stage.get("submit")) {
     if (players.length === 1) {
       return <Loading />;
-    }
-
+    }    
     return (
       <div className="text-center text-gray-400 pointer-events-none">
         Please wait for other player(s).
@@ -29,11 +28,11 @@ export function Stage() {
     case "advertise":
       return < HighQualityAdvertisement />;
     case "results":
-      return <SalesResults />;
+      return <SalesResults player = {player}/>;
     case "advertiseAgain":
       return <HighQualityAdvertisement />;    
     case "gameResults":
-      return <SalesResults />;
+      return <SalesResults player = {player}/>;
     default:
       return <div>Unknown task</div>;
   }
