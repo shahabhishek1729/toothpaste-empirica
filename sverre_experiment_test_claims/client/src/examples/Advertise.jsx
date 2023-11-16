@@ -22,8 +22,6 @@ import {
       player.stage.set("submit", true);
     }
 
-
-  
     //let product = <ProductLayout />;
   
     const isResultStage = stage.get("name") === "result";
@@ -64,10 +62,10 @@ import {
             ? "Result"
             : "Determine the True Quality of the Product."}
         </p> */}
-        <p>Your current score in this game is: {player.get("score")} </p>
+        <p>Your product is <b>Ordinary Toothpaste</b>. Choose how you want to advertise it.</p>
         <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
-      <ProductLayout title="Ordinary Toothpaste" price="9.99" on_button_click={handleSubmit}/>
-      <ProductLayout title="Toothpaste with cavety protection" price="14.99"on_button_click={handleSubmit}/>
+      <ProductLayout title="Ordinary Toothpaste" price="10" on_button_click={handleSubmit}/>
+      <ProductLayout title="Toothpaste with cavety protection" price="15"on_button_click={handleSubmit}/>
 
     </div>
         {/* {!isResultStage ? (
@@ -96,7 +94,7 @@ import {
           alt={title}
         />
         <div class="flex">
-          <h2>{title} $ {price}</h2>
+          <h2>{title}. {price} points per unit sold</h2>
         </div>
         <Button handleClick={on_button_click} primary>
           💸 Advertise
