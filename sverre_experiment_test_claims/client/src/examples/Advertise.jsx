@@ -18,7 +18,7 @@ import {
       player.round.set("productQuality", e.target.valueAsNumber);
     }
   
-    function handleSubmit(e) {
+    function handleSubmit(e) {/*Here we need to pass what kind of advertisiment option the player chose*/
       player.stage.set("submit", true);
     }
 
@@ -65,7 +65,7 @@ import {
         <p>Your product is <b>Ordinary Toothpaste</b>. Choose how you want to advertise it.</p>
         <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
       <ProductLayout title="Ordinary Toothpaste" price="10" on_button_click={handleSubmit}/>
-      <ProductLayout title="Toothpaste with cavety protection" price="15"on_button_click={handleSubmit}/>
+      <ProductLayout title="Toothpaste with cavety protection" price="15"on_button_click={handleSubmit}/> {/*Here we need to pass what kind of advertisiment option the player chose*/ }
 
     </div>
         {/* {!isResultStage ? (
