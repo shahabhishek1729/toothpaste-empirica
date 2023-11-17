@@ -16,7 +16,11 @@ import { Button } from "../components/Button";
 export function SalesResults({ next, player }) {
 
   const roundScore = 4
-
+  useEffect(() => {
+    console.log("adQuality:", player.get("adQuality"));
+    // rest of your code
+  }, [player]);
+  
   useEffect(() => {
     // Check if the score for this round has already been updated
     const hasScoreBeenUpdated = player.round.get("scoreUpdated");
@@ -43,14 +47,17 @@ export function SalesResults({ next, player }) {
       <div className="mt-2 mb-6">
         {/* <p className="text-sm text-gray-500"> */}
         <p>
-          You chose to sell a {player.get("adQuality")} (should show quality) quality product to an audience of 100 users.
-        <br />
+          You have a low quality product.
         </p>
         <p>
-          {} users bought your product.
+          You chose to advertise it as a {player.get("adQuality")} quality product.
+        <br /> <br />
+        </p>
+        <p>
+       It was advertised to an audience of 100 users, and *insert number here*{} users bought your product.
         </p>
         <p> 
-          You earned 20 dollars in sales.
+          You earned 20 points in sales.
         </p><br/>
         <p> Your score for this round is: {roundScore} </p>
         <p> Your total score is: {player.get("score")} </p><br/>
