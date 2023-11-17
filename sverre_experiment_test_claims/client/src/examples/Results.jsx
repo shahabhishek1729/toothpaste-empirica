@@ -14,8 +14,23 @@ import { Button } from "../components/Button";
 
 
 export function SalesResults({ next, player }) {
+  //This are static and need to be implemented based on some consumer purchasing logic and what kind of advertisement is chosen.
+  const number_of_buyers = 10
+  let point_per_product = 15 //DEPENDS ON WHAT KIND OF ADVERTISEMENT IS CHOSEN
 
-  const roundScore = 4
+  switch (player.get("adQuality")) {
+    case "low":
+      point_per_product = 10;
+    case "high":
+      point_per_product = 15;
+    default:
+      point_per_product =10;
+
+
+  }
+  const roundScore = point_per_product*number_of_buyers
+
+
   useEffect(() => {
     console.log("adQuality:", player.get("adQuality"));
     // rest of your code
@@ -54,12 +69,12 @@ export function SalesResults({ next, player }) {
         <br /> <br />
         </p>
         <p>
-       It was advertised to an audience of 100 users, and *insert number here*{} users bought your product.
+       It was advertised to an audience of 100 users, and {number_of_buyers} users bought your product.
         </p>
         <p> 
-          You earned 20 points in sales.
+          You earned {point_per_product} points per product x {number_of_buyers} units sold = {point_per_product*number_of_buyers} points in sales.
         </p><br/>
-        <p> Your score for this round is: {roundScore} </p>
+        <p> Your score for this round is: {point_per_product*number_of_buyers} </p>
         <p> Your total score is: {player.get("score")} </p><br/>
         <p> 
           Click to proceed to the next round to sell products in this marketplace.
