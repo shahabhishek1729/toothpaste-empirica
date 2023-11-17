@@ -34,20 +34,23 @@ Empirica.onRoundStart(({ round }) => {});
 Empirica.onStageStart(({ stage }) => {});
 
 Empirica.onStageEnded(({ stage }) => {
-  calculateJellyBeansScore(stage);
+  calculateAdvertiserScore(stage);
 });
 
 Empirica.onRoundEnded(({ round }) => {});
 
 Empirica.onGameEnded(({ game }) => {});
 
-// Note: this is not the actual number of beans in the pile, it's a guess...
-const jellyBeansCount = 634;
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
-function calculateJellyBeansScore(stage) {
+function calculateAdvertiserScore(stage) {
   if (
-    stage.get("name") !== "Answer" ||
-    stage.round.get("task") !== "jellybeans"
+    stage.get("name") !== "Advertise" ||
+    stage.round.get("task") !== "advertise" ||
+    stage.get("name") !== "Advertise Again" ||
+    stage.round.get("task") !== "advertiseAgain"
   ) {
     return;
   }
@@ -55,17 +58,19 @@ function calculateJellyBeansScore(stage) {
   for (const player of stage.currentGame.players) {
     let roundScore = 0;
 
-    const playerGuess = player.round.get("guess");
-
-    if (playerGuess) {
-      const deviation = Math.abs(playerGuess - jellyBeansCount);
-      const score = Math.round((1 - deviation / jellyBeansCount) * 10);
-      roundScore = Math.max(0, score);
+    const playerScore = player.get("score");
+    const adQuality = player.get("quality")
+    if (adQuality == "high") {
+      const randomDraw = getRandomInt(100)
+      const salesCount = randomDraw * 15;
+    } {
+      const randomDraw = getRandomInt(100)
+      const salesCount = randomDraw * 10;
     }
 
-    player.round.set("score", roundScore);
+    player.round.set("buyers", randomDraw);
 
     const totalScore = player.get("score") || 0;
-    player.set("score", totalScore + roundScore);
+    player.set("score", totalScore + salesCount);
   }
 }

@@ -18,7 +18,9 @@ import {
       player.round.set("productQuality", e.target.valueAsNumber);
     }
   
-    function handleSubmit(e) {/*Here we need to pass what kind of advertisiment option the player chose*/
+    function handleSubmit(e) {/*Here we need to pass what kind of advertisement option the player chose*/
+      player.set("adQuality", e.target.adQuality)
+      console.log("saved quality to player object")
       player.stage.set("submit", true);
     }
 
@@ -62,27 +64,28 @@ import {
             ? "Result"
             : "Determine the True Quality of the Product."}
         </p> */}
-        <p>Your product is <b>Ordinary Toothpaste</b>. Choose how you want to advertise it.</p>
+          <p>Your product is <b>Ordinary Toothpaste</b>. Choose how you want to advertise it. 
+          <br/><strong>Note: </strong>You have the ability to make any kind of advertisement about this ordinary toothpaste in order to maximize your rewards.</p>
         <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
-      <ProductLayout title="Ordinary Toothpaste" price="10" on_button_click={handleSubmit}/>
-      <ProductLayout title="Toothpaste with cavety protection" price="15"on_button_click={handleSubmit}/> {/*Here we need to pass what kind of advertisiment option the player chose*/ }
+          <ProductLayout title="Ordinary Toothpaste" price="10" quality="low" on_button_click={handleSubmit}/>
+          <ProductLayout title="Claim: Toothpaste offers Cavity Protection" price="15" quality="high" on_button_click={handleSubmit}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
 
-    </div>
-        {/* {!isResultStage ? (
-          <Slider
-            value={player.round.get("quality_param")}
-            onChange={handleChange}
-            disabled={stage.get("name") !== "Answer"}
-            max={3}
-          />
-        ) : null} */}
-  
-        
+        </div>
+            {/* {!isResultStage ? (
+              <Slider
+                value={player.round.get("quality_param")}
+                onChange={handleChange}
+                disabled={stage.get("name") !== "Answer"}
+                max={3}
+              />
+            ) : null} */}
+      
+            
       </div>
     );
   }
   
-  function ProductLayout({ title, imageUrl, price, on_button_click }) {
+  function ProductLayout({ title, imageUrl, price, quality, on_button_click }) {
     return (
       <div className="h-96 w-96 pb-6">
         <div
@@ -94,9 +97,10 @@ import {
           alt={title}
         />
         <div class="flex">
-          <h2>{title}. {price} points per unit sold</h2>
+          <h2>{title}. <br/>
+          {price} points per unit sold</h2>
         </div>
-        <Button handleClick={on_button_click} primary>
+        <Button handleClick={on_button_click} adQuality={quality} primary>
           💸 Advertise
         </Button>
       </div>

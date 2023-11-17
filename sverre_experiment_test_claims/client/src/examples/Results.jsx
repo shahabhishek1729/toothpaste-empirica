@@ -43,11 +43,11 @@ export function SalesResults({ next, player }) {
       <div className="mt-2 mb-6">
         {/* <p className="text-sm text-gray-500"> */}
         <p>
-          You chose to sell a high/low quality product to an audience of 100 users.
+          You chose to sell a {player.get("adQuality")} (should show quality) quality product to an audience of 100 users.
         <br />
         </p>
         <p>
-          50 users bought your product.
+          {} users bought your product.
         </p>
         <p> 
           You earned 20 dollars in sales.
