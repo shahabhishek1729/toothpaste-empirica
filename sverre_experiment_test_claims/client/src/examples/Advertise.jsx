@@ -9,13 +9,13 @@ import {
   import { Button } from "../components/Button";
   import "@empirica/core/player/classic/react";
   
-  export function HighQualityAdvertisement() {
+  export function Advertisement() {
     const player = usePlayer();
     const players = usePlayers();
     const stage = useStage();
   
     function handleChange() {
-      player.round.set("productQuality", e.target.valueAsNumber);
+      console.log("something happened");
     }
   
     // function handleSubmit(e) {/*Here we need to pass what kind of advertisement option the player chose*/
@@ -25,11 +25,11 @@ import {
     // }
     function handleSubmit(e, quality) {
       player.set("adQuality", quality);
-      console.log("Saved quality to player object: ", quality);
+      console.log("Saved quality to player object: ", quality, " ", player.id);
       player.stage.set("submit", true);
     }
     
-    //let product = <ProductLayout />;
+    let product = <ProductLayout />;
   
     const isResultStage = stage.get("name") === "result";
   
@@ -72,8 +72,8 @@ import {
           <p>Your product is <b>Ordinary Toothpaste</b>. Choose how you want to advertise it. 
           <br/><strong>Note: </strong>You have the ability to make any kind of advertisement about this ordinary toothpaste in order to maximize your rewards.</p>
         <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
-          <ProductLayout title="Ordinary Toothpaste" price="10" quality="low" on_button_click={(e) => handleSubmit(e, "low")}/>
-          <ProductLayout title="Claim: Toothpaste offers Cavity Protection" price="15" quality="high" on_button_click={(e) => handleSubmit(e, "high")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
+          <ProductLayout title="Ordinary Toothpaste" price="10" on_button_click={(e) => handleSubmit(e, "ordinary")}/>
+          <ProductLayout title="Claim: Extraordinary Toothpaste offers Cavity Protection" price="15" on_button_click={(e) => handleSubmit(e, "extraordinary")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
         </div>
             {/* {!isResultStage ? (
               <Slider
@@ -100,14 +100,14 @@ import {
           }}
           alt={title}
         />
-        <div class="flex">
+        <div className="flex">
           <h2>{title}. <br/>
           {price} points per unit sold</h2>
         </div>
         {/* <Button handleClick={on_button_click} adQuality={quality} primary>
           💸 Advertise
         </Button> */}
-        <Button handleClick={on_button_click} adQuality={quality} primary>
+        <Button handleClick={on_button_click} primary>
           💸 Select this advertisement
             </Button>
 

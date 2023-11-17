@@ -31,11 +31,11 @@ Empirica.onGameStart(({ game }) => {
 
 Empirica.onRoundStart(({ round }) => {});
 
-Empirica.onStageStart(({ stage }) => {});
-
-Empirica.onStageEnded(({ stage }) => {
-  calculateAdvertiserScore(stage);
+Empirica.onStageStart(({ stage }) => {
+  // calculateAdvertiserScore(stage);
 });
+
+Empirica.onStageEnded(({ stage }) => {});
 
 Empirica.onRoundEnded(({ round }) => {});
 
@@ -56,21 +56,23 @@ function calculateAdvertiserScore(stage) {
   }
 
   for (const player of stage.currentGame.players) {
-    let roundScore = 0;
-
-    const playerScore = player.get("score");
-    const adQuality = player.get("quality")
-    if (adQuality == "high") {
-      const randomDraw = getRandomInt(100)
-      const salesCount = randomDraw * 15;
+    console.log('calculating advertiser score')
+    let adQuality = player.get("adQuality")
+    let salesCount = 0
+    let randomDraw = 0
+    if (adQuality == "extraordinary") {
+      randomDraw = getRandomInt(100)
+      salesCount = randomDraw * 15;
     } {
-      const randomDraw = getRandomInt(100)
-      const salesCount = randomDraw * 10;
+      let randomDraw = getRandomInt(100)
+      salesCount = randomDraw * 10;
     }
 
-    player.round.set("buyers", randomDraw);
+    player.set("numBuyers", randomDraw);
 
-    const totalScore = player.get("score") || 0;
+    let totalScore = player.get("score") || 0;
+    player.set("salesCount", salesCount);
     player.set("score", totalScore + salesCount);
+    player.set("scoreUpdated", true)
   }
 }

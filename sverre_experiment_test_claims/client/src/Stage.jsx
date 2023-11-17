@@ -5,7 +5,7 @@ import {
 } from "@empirica/core/player/classic/react";
 import { Loading } from "@empirica/core/player/react";
 import React from "react";
-import { HighQualityAdvertisement } from "./examples/Advertise";
+import { Advertisement } from "./examples/Advertise";
 import { SalesResults } from "./examples/Results";
 
 export function Stage() {
@@ -26,13 +26,13 @@ export function Stage() {
 
   switch (round.get("task")) {
     case "advertise":
-      return < HighQualityAdvertisement />;
+      return < Advertisement />;
     case "results":
-      return <SalesResults player = {player}/>;
+      return <SalesResults />;
     case "advertiseAgain":
-      return <HighQualityAdvertisement />;    
+      return <Advertisement />;    
     case "gameResults":
-      return <SalesResults player = {player}/>;
+      return <SalesResults />;
     default:
       return <div>Unknown task</div>;
   }
