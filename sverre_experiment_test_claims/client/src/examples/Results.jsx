@@ -1,41 +1,32 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../components/Button";
-// import { usePlayer } from "@empirica/core";
 import { usePlayer } from "@empirica/core/player/classic/react";
-
+import { useRef } from "react";
 
 export function SalesResults({}) {
-  const player = usePlayer()
-  
+  console.log('calculating advertiser score');
+  const player = usePlayer();
+  const adQuality = player.get("adQuality");
+  const currentScore = player.get("score") || 0; // , adQuality, points, salesCount, numBuyers
+
+  let points = 10;
+  const numBuyers = Math.floor(Math.random() * 100);
+
+  switch (adQuality) {
+    case "extraordinary":
+      points = 15;
+  }
+  console.log(adQuality, currentScore, numBuyers);
+
+  const salesCount = numBuyers * points;
+  const finalScore = currentScore + salesCount
+
   function handleSubmit() {
     console.log('Moving on from results round');
     player.stage.set("submit", true);
+    player.set("score", finalScore);
   }
   
-  console.log('calculating advertiser score')
-  let point_per_product = 10
-  const adQuality = player.get("adQuality")
-  const numBuyers = Math.floor(Math.random() * 100)
-  
-  switch (adQuality) {
-    case "extraordinary":
-      point_per_product = 15;
-    default:
-      point_per_product = 10;
-  }
-
-  const salesCount = numBuyers * point_per_product
-  const currentScore = player.get("score") || 0;
-  player.set("score", currentScore + salesCount);
-
-  // useEffect(() => {
-  //   console.log("adQuality: ", player.get("adQuality"));
-  //   console.log("currentScore: ", player.get("score"));
-  //   console.log("numBuyers: ", player.get("numBuyers"));
-  //   console.log("point_per_product: ", point_per_product);
-  //   // rest of your code
-  // }, [player]);
-
   return (
     <div className="mt-3 sm:mt-5 p-20">
       <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -54,7 +45,7 @@ export function SalesResults({}) {
           It was advertised to an audience of 100 users, and {numBuyers} users bought your product.
         </p>
         <p> 
-          You earned {point_per_product} points per product x {numBuyers} units sold = {salesCount} points in sales.
+          You earned {points} points per product x {numBuyers} units sold = {salesCount} points in sales.
         </p><br/>
         <p> Your score for this round is: {salesCount} </p>
         <p> Your total score is: {salesCount + currentScore} </p><br/>
