@@ -23,7 +23,6 @@ export function ExitSurvey({ next }) {
       gender,
       advertise,
       feedback,
-      fair,
       education,
     });
     next();
@@ -142,9 +141,7 @@ export function ExitSurvey({ next }) {
                   Could you explain why or provide other feedback, including problems you encountered.
                 </label>
 
-                <label className={labelClassName}>
-                  Do you feel the advertisement payout was fair?
-                </label>
+                <br/>
 
                 <textarea
                   className={inputClassName}
@@ -164,16 +161,6 @@ export function ExitSurvey({ next }) {
                   rows={4}
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
-                />
-
-                <textarea
-                  className={inputClassName}
-                  dir="auto"
-                  id="fair"
-                  name="fair"
-                  rows={4}
-                  value={fair}
-                  onChange={(e) => setFair(e.target.value)}
                 />
               </div>
 

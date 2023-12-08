@@ -29,9 +29,17 @@ export function Stage() {
       return < Advertisement />;
     case "results":
       return <SalesResults />;
-    case "advertiseAgain":
+    case "advertise2":
       return <Advertisement />;    
-    case "gameResults":
+    case "results2":
+      return <SalesResults />;
+    case "advertise3":
+      return <Advertisement />;    
+    case "results3":
+      return <SalesResults />;
+    case "advertise4":
+      return <Advertisement />;    
+    case "results4":
       return <SalesResults />;
     default:
       return <div>Unknown task</div>;

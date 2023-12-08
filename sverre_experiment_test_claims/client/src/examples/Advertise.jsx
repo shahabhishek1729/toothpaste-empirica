@@ -69,10 +69,13 @@ import {
             ? "Result"
             : "Determine the True Quality of the Product."}
         </p> */}
-          <p>Your product is <b>Ordinary Toothpaste</b>. Choose how you want to advertise it. 
-          <br/><strong>Note: </strong>You have the ability to make any kind of advertisement about this ordinary toothpaste in order to maximize your rewards.</p>
+          <div style={{'font-size': '20px'}}>Your product is <b>Ordinary Toothpaste</b>. Choose how you want to advertise it. 
+          <br/><br/>
+          <b>Note: </b>You have the ability to make any kind of advertisement about this ordinary toothpaste in order to maximize your points.
+          </div>
         <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
           <ProductLayout title="Ordinary Toothpaste" price="10" on_button_click={(e) => handleSubmit(e, "ordinary")}/>
+          <div className="h-72 w-24 pb-6"></div>
           <ProductLayout title="Claim: Extraordinary Toothpaste offers Cavity Protection" price="15" on_button_click={(e) => handleSubmit(e, "extraordinary")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
         </div>
             {/* {!isResultStage ? (
@@ -91,7 +94,7 @@ import {
   
   function ProductLayout({ title, imageUrl, price, quality, on_button_click }) {
     return (
-      <div className="h-96 w-96 pb-6">
+      <div className="h-72 w-72 pb-6">
         <div
           className="h-full w-full bg-contain bg-center bg-no-repeat"
           style={{
@@ -101,12 +104,14 @@ import {
           alt={title}
         />
         <div className="flex">
-          <h2>{title}. <br/>
+          <h2 style={{'font-size': '20px'}}>{title}. 
+          <br/>
           {price} points per unit sold</h2>
         </div>
         {/* <Button handleClick={on_button_click} adQuality={quality} primary>
           💸 Advertise
         </Button> */}
+        <br/>
         <Button handleClick={on_button_click} primary>
           💸 Select this advertisement
             </Button>
