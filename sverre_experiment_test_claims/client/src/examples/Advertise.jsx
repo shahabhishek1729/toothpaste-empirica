@@ -23,13 +23,27 @@ import {
     //   console.log("saved quality to player object")
     //   player.stage.set("submit", true);
     // }
-    function handleSubmit(e, quality) {
-      player.set("adQuality", quality);
-      console.log("Saved quality to player object: ", quality, " ", player.id);
+    function handleSubmit() {
+      console.log("Player.stage set to true");
       player.stage.set("submit", true);
+      //player.stage.submit();
+    }
+
+
+    function handleProductionChoice(e, productionQuality) {
+      player.round.set("productionQuality",productionQuality);
+      console.log("Saved production quality to player.round object: ", productionQuality);
     }
     
-    let product = <ProductLayout />;
+    function handleAdverisementChoice(e, advertisementQuality) {
+      player.round.set("advertisementQuality", advertisementQuality);
+      console.log("Saved advertisement quality to player.round object: ", advertisementQuality);
+    }
+
+    function handlePriceChoice(e, priceOfProduct) {
+      player.round.set("priceOfProduct", priceOfProduct);
+      console.log("Saved priceOfProduct to player.round object: ", priceOfProduct);
+    }
   
     const isResultStage = stage.get("name") === "result";
   
@@ -73,15 +87,15 @@ import {
         <h1><b>You are a producer of toothpaste</b></h1>
           <h1><b>Choose what to produce</b></h1>
           <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
-          <ProductionAlternative title="Standard Toothpaste (low quality)" cost="5" quality="low" imageUrl={""} on_button_click={(e) => handleSubmit(e, "low")}/>
-          <ProductionAlternative title="Amazing Toothpaste (high quality)" cost="9" quality="high" on_button_click={(e) => handleSubmit(e, "high")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
+          <ProductionAlternative title="Standard Toothpaste (low quality)" cost="5" quality="low" imageUrl={""} on_button_click={(e) => handleProductionChoice(e, "low")}/>
+          <ProductionAlternative title="Amazing Toothpaste (high quality)" cost="9" quality="high" on_button_click={(e) => handleProductionChoice(e, "high")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
         </div>
         <br/><br/><br/><br/><br/><br/><br/>
           <h1><b>Choose how you want to advertise it</b></h1>
           <p><strong>Note: </strong>You have the ability to make any kind of advertisement<br/> about your product in order to maximize your sales.</p>
           <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
-          <AdvertisementAlternative title="Standard Toothpaste (low quality)" price="10" quality="low" on_button_click={(e) => handleSubmit(e, "low")}/>
-          <AdvertisementAlternative title="Amazing Toothpaste (high quality)" price="15" quality="high" on_button_click={(e) => handleSubmit(e, "high")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
+          <AdvertisementAlternative title="Standard Toothpaste (low quality)" price="10" quality="low" on_button_click={(e) => handleAdverisementChoice(e, "low")}/>
+          <AdvertisementAlternative title="Amazing Toothpaste (high quality)" price="15" quality="high" on_button_click={(e) => handleAdverisementChoice(e, "high")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
         </div>
         <br/><br/><br/><br/><br/>
           <h1><b>Choose the price for your product</b></h1>
@@ -90,16 +104,22 @@ import {
           <p> A typical price for <b>high</b> quality toothpaste is : $15 </p>
           <p><strong>Note: </strong>You have the ability to set any kind of price<br/> for your product in order to maximize your sales.</p>
           <div className="flex justify-center space-x-4"> 
-          <PriceButton text={'$10'}></PriceButton>
-          <PriceButton text={'$15'}></PriceButton>
+          <PriceButton text={'$10'} on_button_click={(e) => handlePriceChoice(e, "10")}></PriceButton>
+          <PriceButton text={'$15'} on_button_click={(e) => handlePriceChoice(e, "15")}></PriceButton>
           </div>
           <br/><br/>
-            <Button> Go to market (next round) </Button>
+            <NextRoundButton on_button_click={(e) => handleSubmit(e)}/>
             <br/>
       </div>
     );
   }
   
+  function NextRoundButton({on_button_click}){
+    return (
+    <Button handleClick={on_button_click}> Go to market (next round) </Button>
+    )
+  }
+
   function ProductionAlternative({ title, imageUrl, cost, quality, on_button_click }) {
     return (
       <div className="h-50 w-50 pb-6">
@@ -144,9 +164,9 @@ import {
     );
   }
 
-  function PriceButton({text, price}){
+  function PriceButton({text, price, on_button_click}){
     return(
-      <Button >
+      <Button handleClick={on_button_click} >
           🏷️ Sell my product for {text} {price}
             </Button>
     )
