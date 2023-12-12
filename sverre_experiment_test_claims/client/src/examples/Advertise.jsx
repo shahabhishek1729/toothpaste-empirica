@@ -18,15 +18,14 @@ import {
       console.log("something happened");
     }
   
-    // function handleSubmit(e) {/*Here we need to pass what kind of advertisement option the player chose*/
-    //   player.set("adQuality", e.target.adQuality)
-    //   console.log("saved quality to player object")
-    //   player.stage.set("submit", true);
-    // }
+
     function handleSubmit() {
       console.log("Player.stage set to true");
-      player.stage.set("submit", true);
-      //player.stage.submit();
+      //let a = player.get("productionQuality")
+      //console.log("a :", a)
+      player.set("round1choice", [player.round.get("productionQuality"), player.round.get("advertisementQuality"), player.round.get("priceOfProduct")])
+      //console.log(player.get("round1choice"))
+      player.stage.set("submit", true);//player.stage.submit();
     }
 
     function handleProductionChoice(e, productionQuality, cost) {
