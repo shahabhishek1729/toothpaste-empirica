@@ -57,7 +57,7 @@ export function SalesResults({}) {
           You chose to produce a <b>{productionQuality}</b> quality product.
         </p>
         <p>
-          You chose to advertise it as a <b>{advertisementQuality}</b> product.
+          You chose to advertise it as a <b>{advertisementQuality}</b> quality product.
           <p>You sold it at a price of <b>${priceOfProduct}</b></p>
         <br /> <br />
         </p>
