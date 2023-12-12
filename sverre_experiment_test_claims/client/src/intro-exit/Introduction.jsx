@@ -10,13 +10,13 @@ export function Introduction({ next }) {
       <div className="mt-2 mb-6">
         {/* <p className="text-sm text-gray-500"> */}
         <p>
-          In this marketplace, you will have to choose what your priorities are as an advertiser. You will be shown multiple products.
+          In this marketplace, you will have to choose what your priorities are as a producer of toothpaste. You will be shown multiple products.
         <br />
           In <strong>each round of the game</strong>, you will:
         </p>
         <br />
         <p>
-          (a) choose which product to sell based on their quality and price.
+          (a) choose the quality of the product you produce. Choose how to advertise them. Choose what price you want to sell the product for.
         </p>
         <p> 
           (b) obtain the results, gains and losses, based on the sales from the product you chose to advertise. 
