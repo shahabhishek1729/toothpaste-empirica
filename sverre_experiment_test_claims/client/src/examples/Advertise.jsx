@@ -91,15 +91,15 @@ import {
         <h1><b>You are a producer of toothpaste</b></h1>
           <h1><b>Choose what to produce.</b> All your products this round will be the quality you select.</h1>
           <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
-          <ProductionAlternative title="Standard Toothpaste" cost="5" quality="low" imageUrl={""} on_button_click={(e) => handleProductionChoice(e, "low")}/>
-          <ProductionAlternative title="Amazing Toothpaste" cost="9" quality="high" on_button_click={(e) => handleProductionChoice(e, "high")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
+          <ProductionAlternative title="Standard Toothpaste" cost="5" quality="low" imageUrl={"url(/images/toothpastestandard.jpg)"} on_button_click={(e) => handleProductionChoice(e, "low")}/>
+          <ProductionAlternative title="Amazing Toothpaste" cost="9" quality="high" imageUrl={"url(/images/toothpaseamazing.jpg)"} on_button_click={(e) => handleProductionChoice(e, "high")}/> {/*Here we need to pass what kind of advertisement option the player chose*/ }
         </div>
         <br/><br/><br/><br/><br/><br/><br/>
           <h1><b>Choose how you want to advertise it.</b> All your products will be advertised this way</h1>
           <p><strong>Note: </strong>You have the ability to make any kind of advertisement<br/> about your product in order to maximize your sales.</p>
           <div className="flex justify-center space-x-4"> {/* This flex container will lay out its children (products) in a row */}
-          <AdvertisementAlternative title="Standard Toothpaste (low quality)"  quality="low" on_button_click={(e) => handleAdverisementChoice(e, "low")}/>
-          <AdvertisementAlternative title="Amazing Toothpaste (high quality)"  quality="high" on_button_click={(e) => handleAdverisementChoice(e, "high")}/>
+          <AdvertisementAlternative title="Standard Toothpaste (low quality)"  quality="low" imageUrl={"url(/images/toothpastestandard.jpg)"} on_button_click={(e) => handleAdverisementChoice(e, "low")}/>
+          <AdvertisementAlternative title="Amazing Toothpaste (high quality)"  quality="high" imageUrl={"url(/images/toothpaseamazing.jpg)"} on_button_click={(e) => handleAdverisementChoice(e, "high")}/>
         </div>
         <br/><br/><br/><br/><br/>
           <h1><b>Choose the price for your product</b></h1>
@@ -132,8 +132,13 @@ import {
         <div
           className="h-full w-full bg-contain bg-center bg-no-repeat"
           style={{
-            backgroundImage:
-              "url(https://media.istockphoto.com/id/638349734/photo/ttoothpaste-containers-on-white-isolated-background.jpg?s=612x612&w=0&k=20&c=eF1XyMlRaQLI9ETehA3_7En5_3D41GX7FKb8cIWeP8k=)",
+            backgroundImage:imageUrl
+              //"url(https://media.istockphoto.com/id/638349734/photo/ttoothpaste-containers-on-white-isolated-background.jpg?s=612x612&w=0&k=20&c=eF1XyMlRaQLI9ETehA3_7En5_3D41GX7FKb8cIWeP8k=)",
+              //"url(https://i.ibb.co/fF6mWV6/toothpastehigh.jpg)"
+              //"url(/root/bucode/empirica-dev/sverre_experiment_test_claims/client/public/images/toothpaseamazing.jpg)" 
+              //"url(/images/toothpaseamazing.jpg)"
+              //"url(/images/toothpasestandard.jpg)"
+
           }}
           alt={title}
         />
@@ -155,7 +160,8 @@ import {
           className="h-full w-full bg-contain bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              "url(https://media.istockphoto.com/id/638349734/photo/ttoothpaste-containers-on-white-isolated-background.jpg?s=612x612&w=0&k=20&c=eF1XyMlRaQLI9ETehA3_7En5_3D41GX7FKb8cIWeP8k=)",
+              imageUrl
+              //"url(https://media.istockphoto.com/id/638349734/photo/ttoothpaste-containers-on-white-isolated-background.jpg?s=612x612&w=0&k=20&c=eF1XyMlRaQLI9ETehA3_7En5_3D41GX7FKb8cIWeP8k=)",
           }}
           alt={title}
         />
@@ -206,9 +212,8 @@ import {
     let profit = producerPlayer.round.get("priceOfProduct") - producerPlayer.round.get("productionCost")
     return(
       <div>
-
-        <p>You have chosen to produce <b>{producerPlayer.round.get("productionQuality")}</b> quality toothpaste.</p>
-        <p>You have chosen to advertise it as <b>{producerPlayer.round.get("advertisementQuality")}</b> quality toothpase at a <b>price of ${producerPlayer.round.get("priceOfProduct")}</b></p>
+        <p>When people are buying, they will only know the price and the advertised quality. They will not know the true quality until they have bought the product.</p> <br/>
+        <p>You have chosen to produce <b>{producerPlayer.round.get("productionQuality")}</b> quality toothpaste and advertise it as <b>{producerPlayer.round.get("advertisementQuality")}</b> quality toothpase at a <b>price of ${producerPlayer.round.get("priceOfProduct")}</b></p>
         <p>This gives a profit of:  ${profit} per product sold.</p>
 
       </div>
