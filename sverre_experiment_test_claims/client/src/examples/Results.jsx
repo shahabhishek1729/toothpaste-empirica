@@ -11,8 +11,16 @@ export function SalesResults({}) {
   const advertisementQuality = player.get("round1choice")[1]
   const priceOfProduct = player.get("round1choice")[2]
 
-  const currentScore = player.get("score") || 0; // , adQuality, points, salesCount, numBuyers
+  let imageUrl = "";
 
+  if (advertisementQuality === "high") {
+    imageUrl = "/images/toothpaseamazing.jpg"; // Replace with the actual URL for high quality
+  } else if (advertisementQuality === "low") {
+    imageUrl = "/images/toothpastestandard.jpg"; // Replace with the actual URL for low quality
+  }
+
+  const currentScore = player.get("score") || 0; // , adQuality, points, salesCount, numBuyers
+  
   //let points = 10;
   let points = priceOfProduct
 
@@ -53,6 +61,9 @@ export function SalesResults({}) {
           <p>You sold it at a price of <b>${priceOfProduct}</b></p>
         <br /> <br />
         </p>
+
+        <img src={imageUrl} alt="Toothpaste Standard" width="250" height="250"/>
+
         
         <p>
           It was advertised to an audience of 100 users, and {numBuyers} users bought your product.
