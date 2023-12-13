@@ -21,10 +21,13 @@ import {
 
     function handleSubmit() {
       console.log("Player.stage set to true");
-      //let a = player.get("productionQuality")
-      //console.log("a :", a)
-      player.set("round1choice", [player.round.get("productionQuality"), player.round.get("advertisementQuality"), player.round.get("priceOfProduct")])
-      //console.log(player.get("round1choice"))
+
+      player.set("round1choice",
+      [player.round.get("productionQuality"),
+      player.round.get("advertisementQuality"),
+      player.round.get("priceOfProduct"),
+      player.round.get("productionCost")])
+
       player.stage.set("submit", true);//player.stage.submit();
     }
 
@@ -112,7 +115,7 @@ import {
           <p> A typical price for <b>high</b> quality toothpaste is : $15 </p>
           <p><strong>Note: </strong>You have the ability to set any kind of price<br/> for your product in order to maximize your sales.</p>
 
-          <p>Your current choice is to sell at a price of: <b>{player.round.get("priceOfProduct")} </b></p>
+          <p>Your current choice is to sell at a price of: <b>$ {player.round.get("priceOfProduct")} </b></p>
           <div className="flex justify-center space-x-4"> 
           <PriceButton text={'$10'} on_button_click={(e) => handlePriceChoice(e, 10)}></PriceButton>
           <PriceButton text={'$15'} on_button_click={(e) => handlePriceChoice(e, 15)}></PriceButton>
@@ -219,7 +222,7 @@ import {
     return(
       <div>
         
-        <p>You have chosen to produce <b>{producerPlayer.round.get("productionQuality")}</b> quality toothpaste and advertise it as <b>{producerPlayer.round.get("advertisementQuality")}</b> quality toothpase at a <b>price of ${producerPlayer.round.get("priceOfProduct")}</b></p>
+        <p>You have chosen to produce <b>{producerPlayer.round.get("productionQuality")}</b> quality toothpaste and advertise it as <b>{producerPlayer.round.get("advertisementQuality")}</b> quality toothpase at a <b>price of ${producerPlayer.round.get("priceOfProduct")}</b>.</p>
         <h1><p>This gives a <b>profit of  ${profit}</b> per product sold.</p></h1>
 
       </div>

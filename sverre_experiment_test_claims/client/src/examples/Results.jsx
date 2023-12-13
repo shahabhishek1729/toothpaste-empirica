@@ -10,6 +10,7 @@ export function SalesResults({}) {
   const productionQuality = player.get("round1choice")[0]
   const advertisementQuality = player.get("round1choice")[1]
   const priceOfProduct = player.get("round1choice")[2]
+  const productionCost = player.get("round1choice")[3]
 
   let imageUrl = "";
 
@@ -37,7 +38,7 @@ export function SalesResults({}) {
   const numBuyers = Math.floor((Math.random() * (max - min ) + min)) ;
 
 
-  const salesCount = numBuyers * points;
+  const salesCount = numBuyers * (priceOfProduct - productionCost);
   const finalScore = currentScore + salesCount
 
   function handleSubmit() {
@@ -58,7 +59,7 @@ export function SalesResults({}) {
         </p>
         <p>
           You chose to advertise it as a <b>{advertisementQuality}</b> quality product.
-          <p>You sold it at a price of <b>${priceOfProduct}</b></p>
+          <p>You sold it at a price of <b>${priceOfProduct}</b>.</p>
         <br /> <br />
         </p>
 
@@ -69,7 +70,7 @@ export function SalesResults({}) {
           It was advertised to an audience of 100 users, and {numBuyers} users bought your product.
         </p>
         <p> 
-          You earned {priceOfProduct} points per product x {numBuyers} units sold = {salesCount} points in sales.
+          You earned ${priceOfProduct - productionCost}  per product x {numBuyers} units sold = {salesCount} points in sales.
         </p><br/>
         <p> Your score for this round is: {salesCount} </p>
         <p> Your total score is: {salesCount + currentScore} </p><br/>
