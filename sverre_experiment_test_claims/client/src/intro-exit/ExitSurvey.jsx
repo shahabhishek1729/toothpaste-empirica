@@ -1,6 +1,6 @@
 import { usePlayer } from "@empirica/core/player/classic/react";
 import React, { useState } from "react";
-import { Alert } from "../components/Alert";
+// import { Alert } from "../components/Alert";
 import { Button } from "../components/Button";
 
 export function ExitSurvey({ next }) {
@@ -11,9 +11,9 @@ export function ExitSurvey({ next }) {
 
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
-  const [strength, setStrength] = useState("");
-  const [fair, setFair] = useState("");
+  const [advertise, setAdvertise] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [fair, setFair] = useState("");
   const [education, setEducation] = useState("");
 
   function handleSubmit(event) {
@@ -21,8 +21,7 @@ export function ExitSurvey({ next }) {
     player.set("exitSurvey", {
       age,
       gender,
-      strength,
-      fair,
+      advertise,
       feedback,
       education,
     });
@@ -35,7 +34,7 @@ export function ExitSurvey({ next }) {
 
   return (
     <div className="py-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <Alert title="Bonus">
+      {/* <Alert title="Bonus">
         <p>
           Please submit the following code to receive your bonus:{" "}
           <strong>{player.id}</strong>.
@@ -44,7 +43,7 @@ export function ExitSurvey({ next }) {
           Your final <strong>bonus</strong> is in addition of the{" "}
           <strong>1 base reward</strong> for completing the HIT.
         </p>
-      </Alert>
+      </Alert> */}
 
       <form
         className="mt-12 space-y-8 divide-y divide-gray-200"
@@ -135,35 +134,23 @@ export function ExitSurvey({ next }) {
 
               <div className="grid grid-cols-3 gap-x-6 gap-y-3">
                 <label className={labelClassName}>
-                  How would you describe your strength in the game?
+                  Would you prefer to advertise a product's true quality or exaggerate in the future?
                 </label>
 
                 <label className={labelClassName}>
-                  Do you feel the pay was fair?
+                  Could you explain why or provide other feedback, including problems you encountered.
                 </label>
 
-                <label className={labelClassName}>
-                  Feedback, including problems you encountered.
-                </label>
+                <br/>
 
                 <textarea
                   className={inputClassName}
                   dir="auto"
-                  id="strength"
-                  name="strength"
+                  id="advertise"
+                  name="advertise"
                   rows={4}
-                  value={strength}
-                  onChange={(e) => setStrength(e.target.value)}
-                />
-
-                <textarea
-                  className={inputClassName}
-                  dir="auto"
-                  id="fair"
-                  name="fair"
-                  rows={4}
-                  value={fair}
-                  onChange={(e) => setFair(e.target.value)}
+                  value={advertise}
+                  onChange={(e) => setAdvertise(e.target.value)}
                 />
 
                 <textarea

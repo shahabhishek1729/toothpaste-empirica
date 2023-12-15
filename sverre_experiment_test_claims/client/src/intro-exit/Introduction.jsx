@@ -3,17 +3,17 @@ import { Button } from "../components/Button";
 
 export function Introduction({ next }) {
   return (
-    <div className="mt-3 sm:mt-5 p-20">
-      <h3 className="text-lg leading-6 font-medium text-gray-900">
+    <div className="mt-1 sm:mt-5 p-10">
+      <h1 className="text-lg leading-6 font-large text-gray-900" style={{'font-size': '30px'}}>
         Marketplace Instructions
-      </h3>
-      <div className="mt-2 mb-6">
+      </h1>
+      <div className="text-lg mt-10 mb-6">
         {/* <p className="text-sm text-gray-500"> */}
         <p>
           In this marketplace, you will have to choose what your priorities are as a producer of toothpaste. You will be shown multiple products.
         <br />
           In <strong>each round of the game</strong>, you will:
-        </p>
+        </div>
         <br />
         <p>
           (a) choose the quality of the product you produce. Choose how to advertise them. Choose what price you want to sell the product for.

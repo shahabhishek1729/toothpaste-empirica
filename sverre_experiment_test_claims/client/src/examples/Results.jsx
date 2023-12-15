@@ -49,10 +49,10 @@ export function SalesResults({}) {
   
   return (
     <div className="mt-3 sm:mt-5 p-20">
-      <h3 className="text-lg leading-6 font-medium text-gray-900">
-        Sales of Chosen Product
-      </h3>
-      <div className="mt-2 mb-6">
+      <h1 className="text-lg leading-6 font-medium text-gray-900">
+        Sales
+      </h1>
+      <div className="text-lg mt-2 mb-6">
         {/* <p className="text-sm text-gray-500"> */}
         <p>
           You chose to produce a <b>{productionQuality}</b> quality product.
