@@ -9,20 +9,19 @@ import {
   import { Button } from "../components/Button";
   import "@empirica/core/player/classic/react";
   
-  export function Advertisement() {
+  export function Advertisement({roundNumber}) {
     const player = usePlayer();
     const players = usePlayers();
     const stage = useStage();
-  
+    const roundNumberText = 'round' + roundNumber;
+    //console.log('roundNumberText', roundNumberText);
     function handleChange() {
       console.log("something happened");
     }
-  
-
     function handleSubmit() {
       console.log("Player.stage set to true");
 
-      player.set("round1choice",
+      player.set(roundNumberText.concat("_choices"),
       [player.round.get("productionQuality"),
       player.round.get("advertisementQuality"),
       player.round.get("priceOfProduct"),
@@ -174,7 +173,7 @@ import {
           }}
           alt={title}
         />
-        <div class="flex">
+        <div className="flex">
           <h2>{title}. <br/> </h2>
           {/*{price} points per unit sold</h2>*/}
         </div>

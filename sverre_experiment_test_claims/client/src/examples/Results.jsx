@@ -3,17 +3,18 @@ import { Button } from "../components/Button";
 import { usePlayer } from "@empirica/core/player/classic/react";
 import { useRef } from "react";
 
-export function SalesResults({}) {
+export function SalesResults({roundNumber}) {
   console.log('calculating advertiser score');
   const player = usePlayer();
+  const roundNumberText = 'round' + roundNumber;
+  
   //const adQuality = player.get("adQuality");
-  const productionQuality = player.get("round1choice")[0]
-  const advertisementQuality = player.get("round1choice")[1]
-  const priceOfProduct = player.get("round1choice")[2]
-  const productionCost = player.get("round1choice")[3]
-
+  const productionQuality = player.get(roundNumberText.concat("_choices"))[0]
+  const advertisementQuality = player.get(roundNumberText.concat("_choices"))[1]
+  const priceOfProduct = player.get(roundNumberText.concat("_choices"))[2]
+  const productionCost = player.get(roundNumberText.concat("_choices"))[3]
   let imageUrl = "";
-
+  //console.log('roundNumberText', roundNumberText)
   if (advertisementQuality === "high") {
     imageUrl = "/images/toothpaseamazing.jpg"; // Replace with the actual URL for high quality
   } else if (advertisementQuality === "low") {
@@ -59,7 +60,7 @@ export function SalesResults({}) {
         </p>
         <p>
           You chose to advertise it as a <b>{advertisementQuality}</b> quality product.
-          <p>You sold it at a price of <b>${priceOfProduct}</b>.</p>
+        You sold it at a price of <b>${priceOfProduct}</b>.
         <br /> <br />
         </p>
 

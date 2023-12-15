@@ -26,21 +26,21 @@ export function Stage() {
 
   switch (round.get("task")) {
     case "advertise":
-      return < Advertisement />;
+      return < Advertisement roundNumber={1}/>;
     case "results":
-      return <SalesResults />;
+      return <SalesResults roundNumber={1}/>;
     case "advertise2":
-      return <Advertisement />;    
+      return <Advertisement roundNumber={2}/>;    
     case "results2":
-      return <SalesResults />;
+      return <SalesResults roundNumber={2}/>;
     case "advertise3":
-      return <Advertisement />;    
+      return <Advertisement roundNumber={3}/>;    
     case "results3":
-      return <SalesResults />;
+      return <SalesResults roundNumber={3}/>;
     case "advertise4":
-      return <Advertisement />;    
+      return <Advertisement roundNumber={4}/>;    
     case "results4":
-      return <SalesResults />;
+      return <SalesResults roundNumber={4}/>;
     default:
       return <div>Unknown task</div>;
   }
