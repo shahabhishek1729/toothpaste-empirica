@@ -216,6 +216,7 @@ export function Advertisement({roundNumber}) {
                 <WarrantsSlider/>
             </div>
             <ProfitMarginCalculation producerPlayer={player}/>
+            <WarrantsDescription producerPlayer={player}/>
             {NLineBreaks(2)}
             <NextRoundButton on_button_click={(e) => handleSubmit(e)}/>
             <br/>
@@ -359,6 +360,17 @@ function ProfitMarginCalculation({producerPlayer}) {
                     This gives a <b>profit of ${profit}</b> per product sold.
                 </p>
             </h1>
+        </div>
+    );
+}
+
+function WarrantsDescription({producerPlayer}) {
+    return (
+        <div>
+            <p>
+                You have also put up a <b>warrant of ${producerPlayer.round.get("warrant")}</b>, claiming that your
+                advertisement is true and should be shown to a larger number of users.
+            </p>
         </div>
     );
 }
