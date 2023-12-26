@@ -76,41 +76,49 @@ function computePlayerScore(player, roundStr) {
     const advertisementQuality = player.get(roundStr.concat("_choices"))[1]
     const priceOfProduct = player.get(roundStr.concat("_choices"))[2];
     const productionCost = player.get(roundStr.concat("_choices"))[3];
+    const warrant = player.get(roundStr.concat("_choices"))[4];
 
     const profitPerProduct = priceOfProduct - productionCost;
 
     const currentScore = player.get("score") || 0;
 
-    let minBuyers, maxBuyers;
+    // Every additional $10 spent on a warrant shows that advertisement to one additional user.
+    const numExtra = ~~(warrant / 10);
+    const numShown = 100 + numExtra;
+
+    // Initially, anywhere from no one to everyone the ad was shown to may purchase the product.
+    let minBuyers, maxBuyers = numShown;
 
     // advertisementQuality must always be a string, so we'll check for strict equality (===)
     // priceOfProduct may be stored as string or int, so we'll only check for loose equality (==)
-    if (advertisementQuality === "high" && priceOfProduct == 10) {
-        minBuyers = 70;
-        maxBuyers = 100;
-    } else if (advertisementQuality === "high") {
-        minBuyers = 50;
-        maxBuyers = 100;
-    } else if (advertisementQuality === "low" && priceOfProduct == 10) {
-        minBuyers = 50;
-        maxBuyers = 80;
-    } else {
-        minBuyers = 10;
-        maxBuyers = 20;
+    if (advertisementQuality === "high")
+        minBuyers = priceOfProduct == 10 ? 70 : 50;
+    else {
+        minBuyers = priceOfProduct == 10 ? 50 : 10;
+        maxBuyers = ~~(numShown * (priceOfProduct == 10 ? 0.8 : 0.2));
     }
 
-    // TODO: Factor in money spent on advertisement warrant
+    const challenged = advertisementQuality !== productionQuality;
+
+    if (challenged) {
+        minBuyers /= 2;
+        maxBuyers /= 2;
+    }
+
     const numBuyers = randFromRange(minBuyers, maxBuyers);
-    const totalProfit = profitPerProduct * numBuyers;
+    const totalProfit = profitPerProduct * numBuyers - warrant;
     const finalScore = currentScore + totalProfit;
 
     player.set("productionQuality", productionQuality);
     player.set("advertisementQuality", advertisementQuality);
     player.set("priceOfProduct", priceOfProduct);
     player.set("productionCost", productionCost);
+    player.set("numShown", numShown);
     player.set("numBuyers", numBuyers);
     player.set("salesCount", totalProfit);
     player.set("finalScore", finalScore);
+    player.set("warrant", warrant);
+    player.set("challenged", challenged);
 }
 
 Empirica.onStageEnded(({stage}) => {
@@ -125,7 +133,7 @@ Empirica.onStageEnded(({stage}) => {
 
     console.log(`This was round number ${roundNum} with text ${roundNumberText}`)
 
-    for (const player of players) 
+    for (const player of players)
         computePlayerScore(player, roundNumberText);
 });
 

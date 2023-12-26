@@ -23,11 +23,15 @@ export function Advertisement({roundNumber}) {
     function handleSubmit() {
         console.log("Player.stage set to true");
 
+        if (player.round.get("warrant") == undefined)
+            player.round.set("warrant", 0);
+
         player.set(roundNumberText.concat("_choices"), [
             player.round.get("productionQuality"),
             player.round.get("advertisementQuality"),
             player.round.get("priceOfProduct"),
             player.round.get("productionCost"),
+            player.round.get("warrant"),
         ]);
 
         player.stage.set("submit", true); //player.stage.submit();
@@ -313,7 +317,7 @@ function WarrantsSlider() {
             }}
             disabled={false}
             min={0}
-            max={2000}
+            max={500}
         />,
     ];
 }
@@ -352,7 +356,7 @@ function ProfitMarginCalculation({producerPlayer}) {
                 <b>{producerPlayer.round.get("productionQuality")}</b> quality
                 toothpaste and advertise it as{" "}
                 <b>{producerPlayer.round.get("advertisementQuality")}</b> quality
-                toothpase at a{" "}
+                toothpaste at a{" "}
                 <b>price of ${producerPlayer.round.get("priceOfProduct")}</b>.
             </p>
             <h1>

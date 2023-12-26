@@ -9,9 +9,12 @@ export function SalesResults({roundNumber}) {
     const advertisementQuality = player.get("advertisementQuality");
     const priceOfProduct = player.get("priceOfProduct");
     const productionCost = player.get("productionCost");
+    const numShown = player.get("numShown");
     const numBuyers = player.get("numBuyers");
     const salesCount = player.get("salesCount");
     const finalScore = player.get("finalScore");
+    const warrant = player.get("warrant");
+    const warrantChallenged = player.get("challenged");
     const currentScore = player.get("score") || 0;
 
     // Display the toothpaste quality the user chose to produce
@@ -41,18 +44,24 @@ export function SalesResults({roundNumber}) {
                 <p>
                     You chose to advertise it as a <b>{advertisementQuality}</b> quality product.
                     You sold it at a price of <b>${priceOfProduct}</b>.
+                    You also put a <b>${warrant}</b> warrant behind your ad to show it to more users.
+
+                    {warrantChallenged ?
+                        <p>However, your warrant was <b>challenged</b>, and your ad was found to be misleading!
+                        </p> : null}
+
                     <br/> <br/>
                 </p>
 
                 <img src={imageUrl} alt="Toothpaste Standard" width="250" height="250"/>
 
-
                 <p>
-                    It was advertised to an audience of 100 users, and {numBuyers} users bought your product.
+                    It was advertised to an audience of {numShown} users, and {numBuyers} users bought your product.
                 </p>
                 <p>
                     You earned ${priceOfProduct - productionCost} per product x {numBuyers} units sold
-                    = {salesCount} points in sales.
+                    = {salesCount + warrant} points in sales. Factoring in the cost of your ad warrant, you earned
+                    ${salesCount + warrant} - ${warrant} = ${salesCount} points this round.
                 </p><br/>
                 <p> Your score for this round is: {salesCount} </p>
                 <p> Your total score is: {salesCount + currentScore} </p><br/>
@@ -60,6 +69,7 @@ export function SalesResults({roundNumber}) {
                     Click to proceed to the next round to sell products in this marketplace.
                 </p>
             </div>
+
             <Button handleClick={handleSubmit} primary>
                 I'm done!
             </Button>
