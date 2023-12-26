@@ -125,13 +125,10 @@ Empirica.onStageEnded(({stage}) => {
     if (!stage.round.get("task").startsWith("advertise")) return;
 
     const players = stage.currentGame.players;
-    console.log(`SERVER: There were ${players.length} players`)
 
     const stageNumStr = stage.round.get("task").replace("advertise", "");
     const roundNum = stageNumStr === "" ? 1 : parseInt(stageNumStr)
     const roundNumberText = 'round' + roundNum;
-
-    console.log(`This was round number ${roundNum} with text ${roundNumberText}`)
 
     for (const player of players)
         computePlayerScore(player, roundNumberText);

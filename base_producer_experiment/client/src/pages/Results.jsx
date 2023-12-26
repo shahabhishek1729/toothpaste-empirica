@@ -2,7 +2,7 @@ import React from "react";
 import {Button} from "../components/Button";
 import {usePlayer} from "@empirica/core/player/classic/react";
 
-export function SalesResults({roundNumber}) {
+export function SalesResults({players}) {
     const player = usePlayer();
 
     const productionQuality = player.get("productionQuality");
@@ -24,6 +24,8 @@ export function SalesResults({roundNumber}) {
     } else if (advertisementQuality === "low") {
         imageUrl = "/images/toothpastestandard.jpg"; // Replace with the actual URL for low quality
     }
+
+    const opponents = players.filter(pl_ => pl_.id !== player.id);
 
     function handleSubmit() {
         console.log('Moving on from results round');
@@ -70,9 +72,31 @@ export function SalesResults({roundNumber}) {
                 </p>
             </div>
 
+            {LeaderboardEntry(opponents)}
+
             <Button handleClick={handleSubmit} primary>
                 I'm done!
             </Button>
         </div>
     );
+}
+
+function LeaderboardEntry(players) {
+    return (
+        <table style={{border: "2px solid forestgreen", width: "400px", height: "100px"}}>
+            <tr>
+                <th style={{borderBottom: "1px solid black"}}>ID</th>
+                <th style={{borderBottom: "1px solid black", paddingRight: "40px"}}>Score</th>
+            </tr>
+
+            {players.map(player =>
+                <tr>
+                    <td style={{textAlign: "center"}}>{player.id}</td>
+                    <td style={{textAlign: "center", paddingRight: "40px"}}>{player.get("finalScore")}</td>
+                </tr>
+            )}
+        </table>
+
+
+    )
 }

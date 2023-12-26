@@ -24,23 +24,24 @@ export function Stage() {
         );
     }
 
+    console.log(`There were ${players.length} players in the game`)
     switch (round.get("task")) {
         case "advertise":
             return < Advertisement roundNumber={1}/>;
         case "results":
-            return <SalesResults roundNumber={1}/>;
+            return <SalesResults players={players}/>;
         case "advertise2":
             return <Advertisement roundNumber={2}/>;
         case "results2":
-            return <SalesResults roundNumber={2}/>;
+            return <SalesResults players={players}/>;
         case "advertise3":
             return <Advertisement roundNumber={3}/>;
         case "results3":
-            return <SalesResults roundNumber={3}/>;
+            return <SalesResults players={players}/>;
         case "advertise4":
             return <Advertisement roundNumber={4}/>;
         case "results4":
-            return <SalesResults roundNumber={4}/>;
+            return <SalesResults players={players}/>;
         default:
             return <div>Unknown task</div>;
     }
