@@ -125,9 +125,8 @@ Empirica.onStageEnded(({stage}) => {
 
     console.log(`This was round number ${roundNum} with text ${roundNumberText}`)
 
-    for (const player of players) {
+    for (const player of players) 
         computePlayerScore(player, roundNumberText);
-    }
 });
 
 Empirica.onRoundEnded(({round}) => {
