@@ -8,6 +8,8 @@ export function Game() {
   const game = useGame();
   const { playerCount } = game.get("treatment");
 
+  console.log("Beginning game");
+
   return (
     <div className="h-full w-full flex">
       <div className="h-full w-full flex flex-col">
