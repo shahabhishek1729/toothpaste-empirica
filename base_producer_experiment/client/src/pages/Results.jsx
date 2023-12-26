@@ -25,8 +25,6 @@ export function SalesResults({players}) {
         imageUrl = "/images/toothpastestandard.jpg"; // Replace with the actual URL for low quality
     }
 
-    const opponents = players.filter(pl_ => pl_.id !== player.id);
-
     function handleSubmit() {
         console.log('Moving on from results round');
         player.stage.set("submit", true);
@@ -72,7 +70,7 @@ export function SalesResults({players}) {
                 </p>
             </div>
 
-            {LeaderboardEntry(opponents)}
+            {LeaderboardEntry(player, players)}
 
             <Button handleClick={handleSubmit} primary>
                 I'm done!
@@ -81,22 +79,24 @@ export function SalesResults({players}) {
     );
 }
 
-function LeaderboardEntry(players) {
+function LeaderboardEntry(player, players) {
     return (
-        <table style={{border: "2px solid forestgreen", width: "400px", height: "100px"}}>
-            <tr>
-                <th style={{borderBottom: "1px solid black"}}>ID</th>
-                <th style={{borderBottom: "1px solid black", paddingRight: "40px"}}>Score</th>
-            </tr>
-
-            {players.map(player =>
+        <>
+            <h1>Net profit in market:
+                ${players.map(player_ => player_.get("finalScore")).reduce((s, a) => s + a, 0)}</h1>
+            <table style={{border: "2px solid forestgreen", width: "400px", height: "100px"}}>
                 <tr>
-                    <td style={{textAlign: "center"}}>{player.id}</td>
-                    <td style={{textAlign: "center", paddingRight: "40px"}}>{player.get("finalScore")}</td>
+                    <th style={{borderBottom: "1px solid black"}}>ID</th>
+                    <th style={{borderBottom: "1px solid black", paddingRight: "40px"}}>Score</th>
                 </tr>
-            )}
-        </table>
 
-
+                {players.map(player_ =>
+                    <tr>
+                        <td style={{textAlign: "center"}}>{player.id === player_.id ? "You" : player_.id}</td>
+                        <td style={{textAlign: "center", paddingRight: "40px"}}>{player_.get("finalScore")}</td>
+                    </tr>
+                )}
+            </table>
+        </>
     )
 }

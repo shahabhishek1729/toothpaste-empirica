@@ -261,7 +261,8 @@ function ProductionAlternative({
                     {/*cost*/}{" "}
                 </h2>
             </div>
-            <Button handleClick={on_button_click} adQuality={quality} primary>
+            <Button handleClick={on_button_click} adQuality={quality} primary
+                    backgroundColor={cost == 9 ? "#9fcca1" : "#cc9fa3"}>
                 💸 Produce this quality at a cost of ${cost} per unit
             </Button>
         </div>
@@ -316,6 +317,7 @@ function WarrantsSlider() {
                 player.round.set("warrant", num.target.valueAsNumber);
             }}
             disabled={false}
+            stepSize={10}
             min={0}
             max={500}
         />,
