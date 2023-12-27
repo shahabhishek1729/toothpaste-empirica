@@ -83,7 +83,7 @@ function computePlayerScore(player, roundStr) {
     const currentScore = player.get("score") || 0;
 
     // Every additional $10 spent on a warrant shows that advertisement to one additional user.
-    const numExtra = ~~(warrant / 10);
+    const numExtra = ~~(warrant / 5);
     const numShown = 100 + numExtra;
 
     // Initially, anywhere from no one to everyone the ad was shown to may purchase the product.
