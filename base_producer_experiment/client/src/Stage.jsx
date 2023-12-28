@@ -7,6 +7,7 @@ import {Loading} from "@empirica/core/player/react";
 import React from "react";
 import {Advertisement} from "./pages/Advertise";
 import {SalesResults} from "./pages/Results";
+import {Quality} from "./pages/Quality";
 
 export function Stage() {
     const player = usePlayer();
@@ -24,22 +25,26 @@ export function Stage() {
         );
     }
 
-    console.log(`There were ${players.length} players in the game`)
     switch (round.get("task")) {
         case "advertise":
-            return < Advertisement roundNumber={1}/>;
+            // return < Advertisement roundNumber={1}/>;
+            return < Quality roundNumber={1}/>;
         case "results":
             return <SalesResults players={players}/>;
         case "advertise2":
-            return <Advertisement roundNumber={2}/>;
+            // return <Advertisement roundNumber={2}/>;
+            return < Quality roundNumber={2}/>;
         case "results2":
             return <SalesResults players={players}/>;
         case "advertise3":
-            return <Advertisement roundNumber={3}/>;
+            // return <Advertisement roundNumber={3}/>;
+            return < Quality roundNumber={3}/>;
         case "results3":
             return <SalesResults players={players}/>;
         case "advertise4":
-            return <Advertisement roundNumber={4}/>;
+            // return <Advertisement roundNumber={4}/>;
+            return < Quality roundNumber={4}/>;
+        case "results3":
         case "results4":
             return <SalesResults players={players}/>;
         default:
