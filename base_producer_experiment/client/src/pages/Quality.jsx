@@ -48,6 +48,7 @@ export function Quality({roundNumber}) {
                         borderRadius: "15px",
                         fontSize: "16px",
                         marginRight: "10px",
+                        width: "370px"
                     }}>
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>Produce Low
                             Quality</h2>
@@ -70,6 +71,7 @@ export function Quality({roundNumber}) {
                         cursor: "pointer",
                         fontSize: "16px",
                         marginLeft: "10px",
+                        width: "370px"
                     }} onClick={_ => {
                         console.log("High quality clicked");
                         chooseHighQuality();

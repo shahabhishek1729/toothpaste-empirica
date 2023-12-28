@@ -149,22 +149,22 @@ export function Advertisement({roundNumber}) {
             {/*    /!*Here we need to pass what kind of advertisement option the player chose*!/*/}
             {/*</div>*/}
             {/*{NLineBreaks(7)}*/}
-            <h1>
+            <h1 style={{fontFamily: "Avenir", fontSize: "18px"}}>
                 <b>Choose how you want to advertise it.</b> All your products will be
                 advertised this way.
             </h1>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 When people are buying, they will only know the price and the advertised
                 quality. They will not know the true quality until they have bought the
                 product.
             </p>{" "}
             <br/>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 <strong>Note: </strong>You have the ability to make any kind of
                 advertisement
                 <br/> about your product in order to maximize your sales.
             </p>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 Your current choice is to advertise your product as:{" "}
                 <b>{player.round.get("advertisementQuality")} </b> quality toothspaste.
             </p>
@@ -185,22 +185,22 @@ export function Advertisement({roundNumber}) {
                 />
             </div>
             {NLineBreaks(5)}
-            <h1>
+            <h1 style={{fontFamily: "Futura"}}>
                 <b>Choose the price for your product</b>
             </h1>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 {" "}
                 A typical price for <b>low </b> quality toothpaste is : $10{" "}
             </p>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 {" "}
                 A typical price for <b>high</b> quality toothpaste is : $15{" "}
             </p>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 <strong>Note: </strong>You have the ability to set any kind of price
                 <br/> for your product in order to maximize your sales.
             </p>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 Your current choice is to sell at a price of:{" "}
                 <b>$ {player.round.get("priceOfProduct")} </b>
             </p>
@@ -214,7 +214,8 @@ export function Advertisement({roundNumber}) {
                     on_button_click={(e) => handlePriceChoice(e, 15)}
                 ></PriceButton>
             </div>
-            <p>You also have the option to add a <strong>warrant</strong> to your advertisement; by choosing to
+            <p style={{fontFamily: "Avenir"}}>You also have the option to add a <strong>warrant</strong> to your
+                advertisement; by choosing to
                 warrant your advertisement, you are putting up a certain amount of money claiming that the
                 advertisement is true and should be shared to a larger number of users. Anyone, including a
                 competitor, could challenge the warrant if your ad’s claims are false</p>
@@ -289,7 +290,7 @@ function AdvertisementAlternative({
                 alt={title}
             />
             <div className="flex">
-                <h2>
+                <h2 style={{fontFamily: "Avenir"}}>
                     {title}. <br/>{" "}
                 </h2>
                 {/*{price} points per unit sold</h2>*/}
@@ -356,7 +357,7 @@ function ProfitMarginCalculation({producerPlayer}) {
         producerPlayer.get("productionCost");
     return (
         <div>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 You have chosen to produce{" "}
                 <b>{producerPlayer.get("productionQuality")}</b> quality
                 toothpaste and advertise it as{" "}
@@ -365,7 +366,7 @@ function ProfitMarginCalculation({producerPlayer}) {
                 <b>price of ${producerPlayer.round.get("priceOfProduct")}</b>.
             </p>
             <h1>
-                <p>
+                <p style={{fontFamily: "Avenir"}}>
                     This gives a <b>profit of ${profit}</b> per product sold.
                 </p>
             </h1>
@@ -376,7 +377,7 @@ function ProfitMarginCalculation({producerPlayer}) {
 function WarrantsDescription({producerPlayer}) {
     return (
         <div>
-            <p>
+            <p style={{fontFamily: "Avenir"}}>
                 You have also put up a <b>warrant of ${producerPlayer.round.get("warrant")}</b>, claiming that your
                 advertisement is true and should be shown to a larger number of users.
             </p>

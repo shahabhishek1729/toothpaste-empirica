@@ -1,86 +1,35 @@
 import {ClassicListenersCollector} from "@empirica/core/admin/classic";
-import {Player} from "@empirica/core";
 
 export const Empirica = new ClassicListenersCollector();
 
 Empirica.onGameStart(({game}) => {
 
-    // Iteration #1
-    const round0 = game.addRound({
-        name: "Quality",
-        task: "quality",
-    });
-    round0.addStage({name: "chooseQuality", duration: 240});
+    for (let i = 0; i < 4; ++i) {
+        // Iteration #1
+        const round_i_1 = game.addRound({
+            name: "Quality",
+            task: `quality${i > 0 ? i + 1 : ''}`,
+        });
+        round_i_1.addStage({name: "chooseQuality", duration: 3600});
 
-    const round1 = game.addRound({
-        name: "Advertise",
-        task: "advertise",
-    });
-    round1.addStage({name: "advertiseProduct", duration: 240});
+        // const round_i_2 = game.addRound({
+        //     name: "Price",
+        //     task: `price${i > 0 ? i + 1 : ''}`,
+        // });
+        // round_i_2.addStage({name: "choosePrice", duration: 3600});
 
-    const round2 = game.addRound({
-        name: "Results",
-        task: "results",
-    });
-    round2.addStage({name: "Result", duration: 140});
+        const round_i_3 = game.addRound({
+            name: "Advertise",
+            task: `advertise${i > 0 ? i + 1 : ''}`,
+        });
+        round_i_3.addStage({name: "advertiseProduct", duration: 3600});
 
-    // Iteration #2
-    const round3 = game.addRound({
-        name: "Quality",
-        task: "quality2",
-    });
-    round3.addStage({name: "chooseQuality", duration: 240});
-
-    const round4 = game.addRound({
-        name: "Advertise",
-        task: "advertise2",
-    });
-    round4.addStage({name: "advertiseProduct", duration: 240});
-
-    const round5 = game.addRound({
-        name: "Results",
-        task: "results2",
-    });
-    round5.addStage({name: "Result", duration: 140});
-
-    // Iteration #3
-    const round6 = game.addRound({
-        name: "Quality",
-        task: "quality3",
-    });
-    round6.addStage({name: "chooseQuality", duration: 240});
-
-    const round7 = game.addRound({
-        name: "Advertise",
-        task: "advertise3",
-    });
-    round7.addStage({name: "advertiseProduct", duration: 240});
-
-    const round8 = game.addRound({
-        name: "Results",
-        task: "results3",
-    });
-    round8.addStage({name: "Result", duration: 140});
-
-    // Iteration #4
-    const round9 = game.addRound({
-        name: "Quality",
-        task: "quality4",
-    });
-    round9.addStage({name: "chooseQuality", duration: 240});
-
-    const round10 = game.addRound({
-        name: "Advertise",
-        task: "advertise4",
-    });
-    round10.addStage({name: "advertiseProduct", duration: 240});
-
-    const round11 = game.addRound({
-        name: "Game Results",
-        task: "results4",
-    });
-    round11.addStage({name: "Result", duration: 140});
-
+        const round_i_4 = game.addRound({
+            name: "Results",
+            task: `results${i > 0 ? i + 1 : ''}`,
+        });
+        round_i_4.addStage({name: "Result", duration: 3600});
+    }
 });
 
 Empirica.onRoundStart(({round}) => {
