@@ -16,6 +16,9 @@ export function Advertisement({roundNumber}) {
     const roundNumberText = "round" + roundNumber;
 
     //console.log('roundNumberText', roundNumberText);
+    console.log(`Proudction quality was ${player.get("productionQuality")}`)
+    console.log(`Proudction cost was ${player.get("productionCost")}`)
+
     function handleChange() {
         console.log("something happened");
     }
@@ -27,10 +30,10 @@ export function Advertisement({roundNumber}) {
             player.round.set("warrant", 0);
 
         player.set(roundNumberText.concat("_choices"), [
-            player.round.get("productionQuality"),
+            player.get("productionQuality"),
             player.round.get("advertisementQuality"),
             player.round.get("priceOfProduct"),
-            player.round.get("productionCost"),
+            player.get("productionCost"),
             player.round.get("warrant"),
         ]);
 
@@ -118,34 +121,34 @@ export function Advertisement({roundNumber}) {
 
             {NLineBreaks(32)}
 
-            <h1>
-                <b>You are a producer of toothpaste</b>
-            </h1>
-            <h1>
-                <b>Choose what to produce.</b> All your products this round will be the
-                quality you select. <br/> Your current choice is to produce:{" "}
-                <b>{player.round.get("productionQuality")} </b> quality toothspaste.
-            </h1>
-            <div className="flex justify-center space-x-4">
-                {" "}
-                {/* This flex container will lay out its children (products) in a row */}
-                <ProductionAlternative
-                    title="Standard Toothpaste"
-                    cost="5"
-                    quality="low"
-                    imageUrl={"url(/images/toothpastestandard.jpg)"}
-                    on_button_click={(e) => handleProductionChoice(e, "low")}
-                />
-                <ProductionAlternative
-                    title="Amazing Toothpaste"
-                    cost="9"
-                    quality="high"
-                    imageUrl={"url(/images/toothpaseamazing.jpg)"}
-                    on_button_click={(e) => handleProductionChoice(e, "high")}
-                />{" "}
-                {/*Here we need to pass what kind of advertisement option the player chose*/}
-            </div>
-            {NLineBreaks(7)}
+            {/*<h1>*/}
+            {/*    <b>You are a producer of toothpaste</b>*/}
+            {/*</h1>*/}
+            {/*<h1>*/}
+            {/*    <b>Choose what to produce.</b> All your products this round will be the*/}
+            {/*    quality you select. <br/> Your current choice is to produce:{" "}*/}
+            {/*    <b>{player.round.get("productionQuality")} </b> quality toothspaste.*/}
+            {/*</h1>*/}
+            {/*<div className="flex justify-center space-x-4">*/}
+            {/*    {" "}*/}
+            {/*    /!* This flex container will lay out its children (products) in a row *!/*/}
+            {/*    <ProductionAlternative*/}
+            {/*        title="Standard Toothpaste"*/}
+            {/*        cost="5"*/}
+            {/*        quality="low"*/}
+            {/*        imageUrl={"url(/images/toothpastestandard.jpg)"}*/}
+            {/*        on_button_click={(e) => handleProductionChoice(e, "low")}*/}
+            {/*    />*/}
+            {/*    <ProductionAlternative*/}
+            {/*        title="Amazing Toothpaste"*/}
+            {/*        cost="9"*/}
+            {/*        quality="high"*/}
+            {/*        imageUrl={"url(/images/toothpaseamazing.jpg)"}*/}
+            {/*        on_button_click={(e) => handleProductionChoice(e, "high")}*/}
+            {/*    />{" "}*/}
+            {/*    /!*Here we need to pass what kind of advertisement option the player chose*!/*/}
+            {/*</div>*/}
+            {/*{NLineBreaks(7)}*/}
             <h1>
                 <b>Choose how you want to advertise it.</b> All your products will be
                 advertised this way.
@@ -350,12 +353,12 @@ function PlayerScore(player, onChange, isResultStage) {
 function ProfitMarginCalculation({producerPlayer}) {
     let profit =
         producerPlayer.round.get("priceOfProduct") -
-        producerPlayer.round.get("productionCost");
+        producerPlayer.get("productionCost");
     return (
         <div>
             <p>
                 You have chosen to produce{" "}
-                <b>{producerPlayer.round.get("productionQuality")}</b> quality
+                <b>{producerPlayer.get("productionQuality")}</b> quality
                 toothpaste and advertise it as{" "}
                 <b>{producerPlayer.round.get("advertisementQuality")}</b> quality
                 toothpaste at a{" "}

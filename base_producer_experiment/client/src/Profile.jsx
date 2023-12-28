@@ -26,7 +26,7 @@ export function Profile() {
                 </div>
             </div>
 
-            {/*<Timer />*/}
+            <Timer/>
 
             <div className="flex space-x-3 items-center justify-end">
                 <div className="flex flex-col items-center">

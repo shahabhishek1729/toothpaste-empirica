@@ -7,18 +7,19 @@ export function Quality({roundNumber}) {
     const roundID = `round${roundNumber}`;
 
     function handleSubmit() {
-        player.set(`${roundID}_choices`, [
-            player.round.get("productionQuality"),
-            player.stage.set("submit", true)
-        ]);
+        console.log(`Proudction quality was ${player.get("productionQuality")}`)
+        console.log(`Proudction cost was ${player.get("productionCost")}`)
+        player.stage.set("submit", true);
     }
 
     function chooseLowQuality() {
-        player.round.set("productionQuality", "low");
+        player.set("productionQuality", "low");
+        player.set("productionCost", 5);
     }
 
     function chooseHighQuality() {
-        player.round.set("productionQuality", "high");
+        player.set("productionQuality", "high");
+        player.set("productionCost", 9);
     }
 
     return (
@@ -34,11 +35,11 @@ export function Quality({roundNumber}) {
                      alignItems: "center",
                      margin: "20px",
                      marginTop: "50px"
-                 }} onClick={_ => {
-                chooseLowQuality();
-                handleSubmit();
-            }}>
-                <div className="option" style={{cursor: "pointer"}}>
+                 }}>
+                <div className="option" style={{cursor: "pointer"}} onClick={_ => {
+                    chooseLowQuality();
+                    handleSubmit();
+                }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#FA6B84",
@@ -70,6 +71,7 @@ export function Quality({roundNumber}) {
                         fontSize: "16px",
                         marginLeft: "10px",
                     }} onClick={_ => {
+                        console.log("High quality clicked");
                         chooseHighQuality();
                         handleSubmit();
                     }}>

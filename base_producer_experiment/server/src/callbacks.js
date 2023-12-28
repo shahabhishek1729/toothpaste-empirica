@@ -5,53 +5,81 @@ export const Empirica = new ClassicListenersCollector();
 
 Empirica.onGameStart(({game}) => {
 
+    // Iteration #1
     const round0 = game.addRound({
+        name: "Quality",
+        task: "quality",
+    });
+    round0.addStage({name: "chooseQuality", duration: 240});
+
+    const round1 = game.addRound({
         name: "Advertise",
         task: "advertise",
     });
-    round0.addStage({name: "advertiseProduct", duration: 240});
+    round1.addStage({name: "advertiseProduct", duration: 240});
 
-    const round1 = game.addRound({
+    const round2 = game.addRound({
         name: "Results",
         task: "results",
     });
-    round1.addStage({name: "Result", duration: 140});
+    round2.addStage({name: "Result", duration: 140});
 
-    const round2 = game.addRound({
-        name: "Advertise",
-        task: "advertise2",
-    });
-    round2.addStage({name: "advertiseProduct", duration: 240});
-
+    // Iteration #2
     const round3 = game.addRound({
-        name: "Results",
-        task: "results2",
+        name: "Quality",
+        task: "quality2",
     });
-    round3.addStage({name: "Result", duration: 140});
+    round3.addStage({name: "chooseQuality", duration: 240});
 
     const round4 = game.addRound({
         name: "Advertise",
-        task: "advertise3",
+        task: "advertise2",
     });
     round4.addStage({name: "advertiseProduct", duration: 240});
 
     const round5 = game.addRound({
         name: "Results",
-        task: "results3",
+        task: "results2",
     });
     round5.addStage({name: "Result", duration: 140});
 
+    // Iteration #3
     const round6 = game.addRound({
+        name: "Quality",
+        task: "quality3",
+    });
+    round6.addStage({name: "chooseQuality", duration: 240});
+
+    const round7 = game.addRound({
+        name: "Advertise",
+        task: "advertise3",
+    });
+    round7.addStage({name: "advertiseProduct", duration: 240});
+
+    const round8 = game.addRound({
+        name: "Results",
+        task: "results3",
+    });
+    round8.addStage({name: "Result", duration: 140});
+
+    // Iteration #4
+    const round9 = game.addRound({
+        name: "Quality",
+        task: "quality4",
+    });
+    round9.addStage({name: "chooseQuality", duration: 240});
+
+    const round10 = game.addRound({
         name: "Advertise",
         task: "advertise4",
     });
-    round6.addStage({name: "advertiseProduct", duration: 240});
+    round10.addStage({name: "advertiseProduct", duration: 240});
 
-    const round7 = game.addRound({
+    const round11 = game.addRound({
         name: "Game Results",
         task: "results4",
     });
-    round7.addStage({name: "Result", duration: 140});
+    round11.addStage({name: "Result", duration: 140});
 
 });
 
