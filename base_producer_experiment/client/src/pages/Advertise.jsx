@@ -95,15 +95,15 @@ export function Advertisement({roundNumber}) {
             </div>
         </div>
     } else if (players.length === 1 && isResultStage) {
-        product = (
-            <div className="grid grid-cols-2 items-center">
-                {/* {product} */}
-                <div>
-                    {isResultStage ? PlayerScore(player, () => {
-                    }, isResultStage) : null}
-                </div>
+        // product = (
+        <div className="grid grid-cols-2 items-center">
+            {/* {product} */}
+            <div>
+                {isResultStage ? PlayerScore(player, () => {
+                }, isResultStage) : null}
             </div>
-        );
+        </div>
+        // );
     }
     return (
         <div className="md:min-w-96 lg:min-w-128 xl:min-w-192 flex flex-col items-center space-y-10">
