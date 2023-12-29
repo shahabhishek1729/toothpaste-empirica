@@ -8,6 +8,7 @@ import React from "react";
 import {Advertisement} from "./pages/Advertise";
 import {SalesResults} from "./pages/Results";
 import {Quality} from "./pages/Quality";
+import {Price} from "./pages/Price";
 
 export function Stage() {
     const player = usePlayer();
@@ -25,30 +26,19 @@ export function Stage() {
         );
     }
 
-    switch (round.get("task")) {
+    const task = round.get("task");
+    const lastChar = task.slice(-1);
+    const taskName = isNaN(lastChar) ? task : task.slice(0, task.length - 1);
+    const roundNumber = isNaN(lastChar) ? 1 : parseInt(lastChar);
+
+    switch (taskName) {
         case "quality":
-            return < Quality roundNumber={1}/>;
+            return < Quality roundNumber={roundNumber}/>;
         case "advertise":
-            return <Advertisement roundNumber={1}/>;
+            return <Advertisement roundNumber={roundNumber}/>;
+        case "price":
+            return <Price roundNumber={roundNumber}/>
         case "results":
-            return <SalesResults players={players}/>;
-        case "quality2":
-            return < Quality roundNumber={2}/>;
-        case "advertise2":
-            return <Advertisement roundNumber={1}/>;
-        case "results2":
-            return <SalesResults players={players}/>;
-        case "quality3":
-            return < Quality roundNumber={3}/>;
-        case "advertise3":
-            return <Advertisement roundNumber={1}/>;
-        case "results3":
-            return <SalesResults players={players}/>;
-        case "quality4":
-            return < Quality roundNumber={4}/>;
-        case "advertise4":
-            return <Advertisement roundNumber={1}/>;
-        case "results4":
             return <SalesResults players={players}/>;
         default:
             return <div>Unknown task</div>;

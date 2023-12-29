@@ -1,4 +1,4 @@
-import {usePlayer, usePlayers, useStage} from "@empirica/core/player/classic/react";
+import {usePlayer} from "@empirica/core/player/classic/react";
 import React from "react";
 
 export function Quality({roundNumber}) {

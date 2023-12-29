@@ -12,11 +12,11 @@ Empirica.onGameStart(({game}) => {
         });
         round_i_1.addStage({name: "chooseQuality", duration: 3600});
 
-        // const round_i_2 = game.addRound({
-        //     name: "Price",
-        //     task: `price${i > 0 ? i + 1 : ''}`,
-        // });
-        // round_i_2.addStage({name: "choosePrice", duration: 3600});
+        const round_i_2 = game.addRound({
+            name: "Price",
+            task: `price${i > 0 ? i + 1 : ''}`,
+        });
+        round_i_2.addStage({name: "choosePrice", duration: 3600});
 
         const round_i_3 = game.addRound({
             name: "Advertise",
