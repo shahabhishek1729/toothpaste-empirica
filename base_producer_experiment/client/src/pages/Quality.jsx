@@ -1,5 +1,6 @@
 import {usePlayer} from "@empirica/core/player/classic/react";
-import React from "react";
+import React, {useState} from "react";
+import {Button} from "../components/Button";
 
 export function Quality({roundNumber}) {
     const player = usePlayer();
@@ -22,8 +23,10 @@ export function Quality({roundNumber}) {
         player.set("productionCost", 9);
     }
 
+    const [selectedIdx, setSelectedIdx] = useState(-1);
+
     return (
-        <div>
+        <div className="flex flex-col items-center">
             <h1 style={{fontSize: "38px", fontStyle: "bold", fontFamily: "Futura"}}>Choose Quality</h1>
             <p style={{fontFamily: "Avenir", fontSize: "20px", marginTop: "20px"}}>You are a producer of toothpaste, and
                 you may choose
@@ -37,8 +40,9 @@ export function Quality({roundNumber}) {
                      marginTop: "50px"
                  }}>
                 <div className="option" style={{cursor: "pointer"}} onClick={_ => {
+                    setSelectedIdx(0);
                     chooseLowQuality();
-                    handleSubmit();
+                    // handleSubmit();
                 }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
@@ -46,6 +50,8 @@ export function Quality({roundNumber}) {
                         color: "#FFF",
                         border: "none",
                         borderRadius: "15px",
+                        outline: selectedIdx === 0 ? "4px solid #FA6B84" : "none",
+                        outlineOffset: "3px",
                         fontSize: "16px",
                         marginRight: "10px",
                         width: "370px"
@@ -66,16 +72,17 @@ export function Quality({roundNumber}) {
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#00CDBB",
                         color: "#FFF",
-                        border: "none",
+                        // border: "none",
+                        outline: selectedIdx === 1 ? "4px solid #00CDBB" : "none",
+                        outlineOffset: "3px",
                         borderRadius: "15px",
                         cursor: "pointer",
                         fontSize: "16px",
                         marginLeft: "10px",
                         width: "370px"
                     }} onClick={_ => {
-                        console.log("High quality clicked");
+                        setSelectedIdx(1);
                         chooseHighQuality();
-                        handleSubmit();
                     }}>
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>Produce High
                             Quality</h2>
@@ -89,6 +96,8 @@ export function Quality({roundNumber}) {
                         src="/images/toothpaseamazing.jpg" alt="Low quality toothpaste"/>
                 </div>
             </div>
+
+            <Button handleClick={handleSubmit} style={{paddingBottom: "100px"}}> Next Page →</Button>
         </div>
     );
 }
