@@ -34,17 +34,13 @@ export function SalesResults({players}) {
     return (
         <div style={{
             display: "flex",
-            justifyContent: "space-around"
+            justifyContent: "space-between"
         }}>
-            <div className="mt-3 sm:mt-5 p-20">
-                {/*<h1 className="text-lg leading-6 font-medium text-gray-900">*/}
-                {/*    Sales*/}
-                {/*</h1>*/}
+            <div className="p-20">
                 <h1 style={{fontFamily: "Futura", fontSize: "28px"}}>Sales</h1>
                 <div className="text-lg mt-2 mb-6">
-                    {/* <p className="text-sm text-gray-500"> */}
                     <p style={{fontFamily: "Avenir"}}>
-                        You chose to produce a <b>{productionQuality}</b> quality product.
+                        You chose to produce <b>{productionQuality}</b> quality toothpaste.
                     </p>
                     <p style={{fontFamily: "Avenir"}}>
                         You chose to advertise it as a <b>{advertisementQuality}</b> quality product.
@@ -88,7 +84,7 @@ export function SalesResults({players}) {
 
 function LeaderboardEntry(player, players) {
     return (
-        <div className="mt-3 sm:mt-5 p-20">
+        <div className="mt-3 sm:mt-5 pt-20 pr-20">
             <h1 style={{fontFamily: "Futura", fontSize: "28px"}}>Leaderboard</h1>
             <h1>Net profit in market:
                 ${players.map(player_ => player_.get("finalScore")).reduce((s, a) => s + a, 0)}</h1>

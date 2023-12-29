@@ -4,8 +4,7 @@ import {
     usePlayers,
     useStage,
 } from "@empirica/core/player/classic/react";
-import React from "react";
-import {Avatar} from "../components/Avatar";
+import React, {useState} from "react";
 import {Button} from "../components/Button";
 import "@empirica/core/player/classic/react";
 
@@ -14,6 +13,8 @@ export function Advertisement({roundNumber}) {
     const players = usePlayers();
     const stage = useStage();
     const roundNumberText = "round" + roundNumber;
+
+    const [selectedIdx, setSelectedIdx] = useState(-1);
 
     function handleChange() {
         console.log("something happened");
@@ -75,6 +76,7 @@ export function Advertisement({roundNumber}) {
     // </div>
     // );
     // }
+
     return (
         <div className="md:min-w-96 lg:min-w-128 xl:min-w-192 flex flex-col items-center space-y-10">
             {NLineBreaks(24)}
@@ -103,17 +105,19 @@ export function Advertisement({roundNumber}) {
                      marginTop: "50px"
                  }}>
                 <div className="option" style={{cursor: "pointer"}} onClick={_ => {
+                    setSelectedIdx(0);
                     player.round.set("advertisementQuality", "low");
                 }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#FA6B84",
                         color: "#FFF",
-                        border: "none",
+                        outline: selectedIdx === 0 ? "4px solid #FA6B84" : "none",
+                        outlineOffset: "3px",
                         borderRadius: "15px",
                         fontSize: "16px",
                         marginRight: "10px",
-                        width: "370px"
+                        width: "370px",
                     }}>
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>Advertise as Low
                             Quality</h2>
@@ -127,19 +131,21 @@ export function Advertisement({roundNumber}) {
                         style={{width: "350px"}}
                         src="/images/toothpastestandard.jpg" alt="Low quality toothpaste"/>
                 </div>
-                <div className="option" style={{cursor: "pointer"}}>
+                <div className="option" style={{cursor: "pointer"}} onClick={_ => {
+                    setSelectedIdx(1);
+                    player.round.set("advertisementQuality", "high");
+                }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#00CDBB",
                         color: "#FFF",
-                        border: "none",
-                        borderRadius: "15px",
+                        borderRadius: "20px",
+                        outline: selectedIdx === 1 ? "4px solid #00CDBB" : "none",
+                        outlineOffset: "3px",
                         cursor: "pointer",
                         fontSize: "16px",
                         marginLeft: "10px",
                         width: "370px"
-                    }} onClick={_ => {
-                        player.round.set("advertisementQuality", "high");
                     }}>
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>Advertise as High
                             Quality</h2>
