@@ -79,22 +79,22 @@ export function SalesResults({players, roundNumber}) {
                     I'm done!
                 </Button>
             </div>
-            {LeaderboardEntry(player, players)}
+            {LeaderboardEntry(roundStr, player, players)}
         </div>
     );
 }
 
-function LeaderboardEntry(player, players) {
+function LeaderboardEntry(roundStr, player, players) {
     // Sort the leaderboard in descending order of final score
     players.sort((player1, player2) => {
-        return player1.get("finalScore") < player2.get("finalScore") ? 1 : 0;
+        return player1.get(roundStr.concat("_finalScore")) < player2.get(roundStr.concat("_finalScore")) ? 1 : 0;
     })
 
     return (
         <div className="mt-3 sm:mt-5 pt-20 pr-20">
             <h1 style={{fontFamily: "Futura", fontSize: "28px"}}>Leaderboard</h1>
             <h1>Net profit in market:
-                ${players.map(player_ => player_.get("finalScore")).reduce((s, a) => s + a, 0)}</h1>
+                ${players.map(player_ => player_.get(roundStr.concat("finalScore"))).reduce((s, a) => s + a, 0)}</h1>
             <table style={{border: "2px solid gray", width: "400px", height: "100px"}}>
                 <tr>
                     <th style={{borderBottom: "1px solid black", paddingLeft: "30px", fontFamily: "Avenir"}}>ID</th>
@@ -111,12 +111,15 @@ function LeaderboardEntry(player, players) {
                             paddingLeft: "30px",
                             fontFamily: "Avenir"
                         }}>{player.id === player_.id ? "You" : player_.id}</td>
-                        <td style={{textAlign: "center", fontFamily: "Avenir"}}>{player_.get("salesCount")}</td>
+                        <td style={{
+                            textAlign: "center",
+                            fontFamily: "Avenir"
+                        }}>{player_.get(roundStr.concat("salesCount"))}</td>
                         <td style={{
                             textAlign: "center",
                             paddingRight: "20px",
                             fontFamily: "Avenir"
-                        }}>{player_.get("finalScore")}</td>
+                        }}>{player_.get(roundStr.concat("finalScore"))}</td>
                     </tr>
                 )}
             </table>
