@@ -85,6 +85,11 @@ export function SalesResults({players, roundNumber}) {
 }
 
 function LeaderboardEntry(player, players) {
+    // Sort the leaderboard in descending order of final score
+    players.sort((player1, player2) => {
+        return player1.get("finalScore") < player2.get("finalScore") ? 1 : 0;
+    })
+
     return (
         <div className="mt-3 sm:mt-5 pt-20 pr-20">
             <h1 style={{fontFamily: "Futura", fontSize: "28px"}}>Leaderboard</h1>
