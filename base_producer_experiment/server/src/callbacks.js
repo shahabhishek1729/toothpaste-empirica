@@ -86,16 +86,16 @@ function computePlayerScore(player, roundStr) {
     const totalProfit = profitPerProduct * numBuyers - warrant;
     const finalScore = currentScore + totalProfit;
 
-    player.set("productionQuality", productionQuality);
-    player.set("advertisementQuality", advertisementQuality);
-    player.set("priceOfProduct", priceOfProduct);
-    player.set("productionCost", productionCost);
-    player.set("numShown", numShown);
-    player.set("numBuyers", numBuyers);
-    player.set("salesCount", totalProfit);
-    player.set("finalScore", finalScore);
-    player.set("warrant", warrant);
-    player.set("challenged", challenged);
+    player.set(roundStr.concat("_productionQuality"), productionQuality);
+    player.set(roundStr.concat("_advertisementQuality"), advertisementQuality);
+    player.set(roundStr.concat("_priceOfProduct"), priceOfProduct);
+    player.set(roundStr.concat("_productionCost"), productionCost);
+    player.set(roundStr.concat("_numShown"), numShown);
+    player.set(roundStr.concat("_numBuyers"), numBuyers);
+    player.set(roundStr.concat("_salesCount"), totalProfit);
+    player.set(roundStr.concat("_finalScore"), finalScore);
+    player.set(roundStr.concat("_warrant"), warrant);
+    player.set(roundStr.concat("_challenged"), challenged);
 }
 
 Empirica.onStageEnded(({stage}) => {

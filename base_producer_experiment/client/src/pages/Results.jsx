@@ -2,20 +2,22 @@ import React from "react";
 import {Button} from "../components/Button";
 import {usePlayer} from "@empirica/core/player/classic/react";
 
-export function SalesResults({players}) {
+export function SalesResults({players, roundNumber}) {
     const player = usePlayer();
 
-    const productionQuality = player.get("productionQuality");
-    const advertisementQuality = player.get("advertisementQuality");
-    const priceOfProduct = player.get("priceOfProduct");
-    const productionCost = player.get("productionCost");
-    const numShown = player.get("numShown");
-    const numBuyers = player.get("numBuyers");
-    const salesCount = player.get("salesCount");
-    const finalScore = player.get("finalScore");
-    const warrant = player.get("warrant");
-    const warrantChallenged = player.get("challenged");
-    const currentScore = player.get("score") || 0;
+    const roundStr = `round${roundNumber}_`
+
+    const productionQuality = player.get(roundStr.concat("productionQuality"));
+    const advertisementQuality = player.get(roundStr.concat("advertisementQuality"));
+    const priceOfProduct = player.get(roundStr.concat("priceOfProduct"));
+    const productionCost = player.get(roundStr.concat("productionCost"));
+    const numShown = player.get(roundStr.concat("numShown"));
+    const numBuyers = player.get(roundStr.concat("numBuyers"));
+    const salesCount = player.get(roundStr.concat("salesCount"));
+    const finalScore = player.get(roundStr.concat("finalScore"));
+    const warrant = player.get(roundStr.concat("warrant"));
+    const warrantChallenged = player.get(roundStr.concat("challenged"));
+    const currentScore = player.get(roundStr.concat("score")) || 0;
 
     // Display the toothpaste quality the user chose to produce
     let imageUrl = "";

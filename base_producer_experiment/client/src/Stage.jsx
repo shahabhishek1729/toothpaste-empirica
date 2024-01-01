@@ -39,7 +39,7 @@ export function Stage() {
         case "price":
             return <Price roundNumber={roundNumber}/>
         case "results":
-            return <SalesResults players={players}/>;
+            return <SalesResults players={players} roundNumber={roundNumber}/>;
         default:
             return <div>Unknown task</div>;
     }
