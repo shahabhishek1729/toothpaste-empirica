@@ -20,4 +20,4 @@ treatments:
     - name: Multi Player
       desc: Three-player Game
       factors:
-        playerCount: 3
+        playerCount: 5
