@@ -11,16 +11,9 @@ export function Quality({roundNumber}) {
         console.log(`Proudction quality was ${player.get("productionQuality")}`)
         console.log(`Proudction cost was ${player.get("productionCost")}`)
         player.stage.set("submit", true);
-    }
 
-    function chooseLowQuality() {
-        player.set(roundID.concat("_productionQuality"), "low");
-        player.set(roundID.concat("_productionCost"), 5);
-    }
-
-    function chooseHighQuality() {
-        player.set(roundID.concat("_productionQuality"), "high");
-        player.set(roundID.concat("_productionCost"), 9);
+        player.set(roundID.concat("_productionQuality"), selectedIdx === 0 ? "low" : "high");
+        player.set(roundID.concat("_productionCost"), selectedIdx === 0 ? 5 : 9);
     }
 
     const [selectedIdx, setSelectedIdx] = useState(-1);
@@ -38,10 +31,7 @@ export function Quality({roundNumber}) {
                 margin: "20px",
                 marginTop: "50px"
             }}>
-                <div style={{cursor: "pointer"}} onClick={_ => {
-                    setSelectedIdx(0);
-                    chooseLowQuality();
-                }}>
+                <div style={{cursor: "pointer"}} onClick={_ => setSelectedIdx(0)}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#FA6B84",
@@ -66,10 +56,7 @@ export function Quality({roundNumber}) {
                         src="/images/toothpastestandard.jpg" alt="Low quality toothpaste"/>
                 </div>
                 <div style={{cursor: "pointer"}}
-                     onClick={_ => {
-                         setSelectedIdx(1);
-                         chooseHighQuality();
-                     }}>
+                     onClick={_ => setSelectedIdx(1)}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#00CDBB",

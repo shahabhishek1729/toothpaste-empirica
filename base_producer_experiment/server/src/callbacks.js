@@ -99,6 +99,8 @@ function computePlayerScore(player, roundStr, warrantValue, challengeProbability
     const totalProfit = profitPerProduct * numBuyers - warrant;
     const finalScore = currentScore + totalProfit;
 
+    console.log(`Price of product was ${priceOfProduct}`)
+
     player.set(roundStr.concat("_productionQuality"), productionQuality);
     player.set(roundStr.concat("_advertisementQuality"), advertisementQuality);
     player.set(roundStr.concat("_priceOfProduct"), priceOfProduct);

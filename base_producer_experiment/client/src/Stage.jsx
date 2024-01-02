@@ -20,7 +20,7 @@ export function Stage() {
             return <Loading/>;
         }
         return (
-            <div className="text-center text-gray-400 pointer-events-none">
+            <div className="text-center text-gray-400 pointer-events-none mt-20">
                 Please wait for other player(s).
             </div>
         );

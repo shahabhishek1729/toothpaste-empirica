@@ -28,22 +28,14 @@ export function Advertisement({roundNumber}) {
         console.log("Player.stage set to true");
 
         player.set(roundNumberText.concat("_choices"), [
-            player.get("productionQuality"),
+            player.get(roundNumberText.concat("_productionQuality")),
             player.round.get("advertisementQuality"),
-            player.get("priceOfProduct"),
-            player.get("productionCost"),
+            player.get(roundNumberText.concat("_priceOfProduct")),
+            player.get(roundNumberText.concat("_productionCost")),
             warrantAdded ? warrantCost : 0
         ]);
 
         player.stage.set("submit", true); //player.stage.submit();
-    }
-
-    function handleAdverisementChoice(e, advertisementQuality) {
-        player.round.set("advertisementQuality", advertisementQuality);
-        console.log(
-            "Saved advertisement quality to player.round object: ",
-            advertisementQuality
-        );
     }
 
     // const isResultStage = stage.get("name") === "result";
@@ -225,27 +217,27 @@ export function Advertisement({roundNumber}) {
                 </div>
             </div>
             <ProfitMarginCalculation producerPlayer={player} warrantAdded={warrantAdded} warrantCost={warrantCost}
-                                     warrantValue={warrantValue}/>
+                                     roundStr={roundNumberText}/>
             <Button handleClick={e => handleSubmit(e)}> Go to market (next round) </Button>
             <br/>
         </div>
     );
 }
 
-function ProfitMarginCalculation({producerPlayer, warrantAdded, warrantCost, warrantValue,}) {
+function ProfitMarginCalculation({producerPlayer, warrantAdded, warrantCost, roundStr}) {
     let profit =
-        producerPlayer.get("priceOfProduct") -
-        producerPlayer.get("productionCost");
+        producerPlayer.get(roundStr.concat("_priceOfProduct")) -
+        producerPlayer.get(roundStr.concat("_productionCost"));
     if (warrantAdded) {
         return (
             <div>
                 <p style={{fontFamily: "Avenir", maxWidth: "800px", textAlign: "center"}}>
                     You have chosen to produce{" "}
-                    <b>{producerPlayer.get("productionQuality")}</b> quality
+                    <b>{producerPlayer.get(roundStr.concat("_productionQuality"))}</b> quality
                     toothpaste and advertise it as{" "}
-                    <b>{producerPlayer.round.get("advertisementQuality")}</b> quality
-                    toothpaste at a{" "}
-                    <b>price of ${producerPlayer.get("priceOfProduct")}</b>.
+                    <b>{producerPlayer.round.get(roundStr.concat("_advertisementQuality"))}</b> quality
+                    toothpaste
+                    <b> charging ${producerPlayer.get(roundStr.concat("_priceOfProduct"))}</b>.
                     This gives a <b>profit of ${profit}</b> per product sold.
                     You have also put up a <b>warrant of
                     ${warrantCost}</b>, claiming that your
@@ -259,14 +251,13 @@ function ProfitMarginCalculation({producerPlayer, warrantAdded, warrantCost, war
             <div>
                 <p style={{fontFamily: "Avenir", maxWidth: "800px", textAlign: "center"}}>
                     You have chosen to produce{" "}
-                    <b>{producerPlayer.get("productionQuality")}</b> quality
+                    <b>{producerPlayer.get(roundStr.concat("_productionQuality"))}</b> quality
                     toothpaste and advertise it as{" "}
-                    <b>{producerPlayer.round.get("advertisementQuality") || "______"}</b> quality
-                    toothpaste at a{" "}
-                    <b>price of ${producerPlayer.get("priceOfProduct")}</b>.
+                    <b>{producerPlayer.round.get(roundStr.concat("_advertisementQuality"))}</b> quality
+                    toothpaste
+                    <b> charging ${producerPlayer.get(roundStr.concat("_priceOfProduct"))}</b>.
                     This gives a <b>profit of ${profit}</b> per product sold.</p>
-            </div>
-        );
+            </div>);
     }
 }
 

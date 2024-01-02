@@ -8,7 +8,8 @@ export function Price({roundNumber}) {
     const roundID = `round${roundNumber}`;
 
     function handleSubmit() {
-        console.log(`Proudction price was ${player.get("priceOfProduct")}`)
+        console.log(`Production price was ${player.get("priceOfProduct")}`)
+        player.set(roundID.concat("_priceOfProduct"), selectedIdx === 0 ? 10 : 15);
         player.stage.set("submit", true);
     }
 
@@ -26,10 +27,7 @@ export function Price({roundNumber}) {
                 margin: "20px",
                 marginTop: "50px"
             }}>
-                <div className="option" style={{cursor: "pointer"}} onClick={_ => {
-                    setSelectedIdx(0);
-                    player.set(roundID.concat("_priceOfProduct"), 10);
-                }}>
+                <div className="option" style={{cursor: "pointer"}} onClick={_ => setSelectedIdx(0)}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#FA6B84",
@@ -52,10 +50,7 @@ export function Price({roundNumber}) {
                         src="/images/toothpastestandard.jpg" alt="Low quality toothpaste"/>
                 </div>
                 <div style={{cursor: "pointer"}}
-                     onClick={_ => {
-                         setSelectedIdx(1);
-                         player.set(roundID.concat("_priceOfProduct"), 15);
-                     }}>
+                     onClick={_ => setSelectedIdx(1)}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#00CDBB",

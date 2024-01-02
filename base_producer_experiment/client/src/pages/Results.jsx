@@ -18,6 +18,9 @@ export function SalesResults({players, roundNumber}) {
     const warrant = player.get(roundStr.concat("warrant"));
     const warrantChallenged = player.get(roundStr.concat("challenged"));
 
+    console.log(`The product was made at ${productionCost}`)
+    console.log(`The product costs ${priceOfProduct}`)
+
     // Display the toothpaste quality the user chose to produce
     let imageUrl = "";
     if (advertisementQuality === "high") {
@@ -52,14 +55,15 @@ export function SalesResults({players, roundNumber}) {
 
                         {warrantChallenged && productionQuality !== advertisementQuality ?
                             <p style={{fontFamily: "Avenir"}}>However, your warrant was <b>challenged</b>, and your ad
-                                was found to be misleading! As a penalty, your warrant was <b>revoked</b> and the money
+                                was found to be <b>misleading</b>! As a penalty, your warrant was <b>revoked</b> and the
+                                money
                                 you
                                 spent on it was lost.
                             </p> : null}
 
                         {warrantChallenged && productionQuality === advertisementQuality ?
                             <p style={{fontFamily: "Avenir"}}>Your warrant was <b>challenged</b>, but your ad
-                                was found to be honest, so no additional actions were taken.
+                                was found to be <b>honest</b>, so no additional actions were taken.
                             </p> : null}
 
                         <br/> <br/>
@@ -104,10 +108,12 @@ function LeaderboardEntry(roundStr, player, players) {
             <h1 style={{fontFamily: "Futura", fontSize: "28px"}}>Leaderboard</h1>
             <h1>Net profit in market:
                 ${players.map(player_ => player_.get("finalScore")).reduce((s, a) => s + a, 0)}</h1>
-            <table style={{border: "2px solid gray", width: "400px", height: "100px"}}>
+            <table style={{border: "2px solid gray", height: "100px"}}>
                 <tr>
                     <th style={{borderBottom: "1px solid black", paddingLeft: "30px", fontFamily: "Avenir"}}>ID</th>
-                    <th style={{borderBottom: "1px solid black", fontFamily: "Avenir"}}>Score this Round</th>
+                    <th style={{borderBottom: "1px solid black", paddingRight: "10px", fontFamily: "Avenir"}}>Score this
+                        Round
+                    </th>
                     <th style={{borderBottom: "1px solid black", paddingRight: "20px", fontFamily: "Avenir"}}>Total
                         Score
                     </th>
