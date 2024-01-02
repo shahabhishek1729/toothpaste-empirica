@@ -10,19 +10,19 @@ Empirica.onGameStart(({game}) => {
             name: "Quality",
             task: `quality${i > 0 ? i + 1 : ''}`,
         });
-        round_i_1.addStage({name: "chooseQuality", duration: 3600});
+        round_i_1.addStage({name: "chooseQuality", duration: 240});
 
         const round_i_2 = game.addRound({
             name: "Price",
             task: `price${i > 0 ? i + 1 : ''}`,
         });
-        round_i_2.addStage({name: "choosePrice", duration: 3600});
+        round_i_2.addStage({name: "choosePrice", duration: 240});
 
         const round_i_3 = game.addRound({
             name: "Advertise",
             task: `advertise${i > 0 ? i + 1 : ''}`,
         });
-        round_i_3.addStage({name: "advertiseProduct", duration: 3600});
+        round_i_3.addStage({name: "advertiseProduct", duration: 300});
 
         const round_i_4 = game.addRound({
             name: "Results",
