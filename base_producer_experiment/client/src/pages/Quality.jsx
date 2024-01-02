@@ -14,13 +14,13 @@ export function Quality({roundNumber}) {
     }
 
     function chooseLowQuality() {
-        player.set("productionQuality", "low");
-        player.set("productionCost", 5);
+        player.set(roundID.concat("_productionQuality"), "low");
+        player.set(roundID.concat("_productionCost"), 5);
     }
 
     function chooseHighQuality() {
-        player.set("productionQuality", "high");
-        player.set("productionCost", 9);
+        player.set(roundID.concat("_productionQuality"), "high");
+        player.set(roundID.concat("_productionCost"), 9);
     }
 
     const [selectedIdx, setSelectedIdx] = useState(-1);

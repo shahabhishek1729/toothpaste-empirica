@@ -28,7 +28,7 @@ export function Price({roundNumber}) {
             }}>
                 <div className="option" style={{cursor: "pointer"}} onClick={_ => {
                     setSelectedIdx(0);
-                    player.set("priceOfProduct", 10);
+                    player.set(roundID.concat("_priceOfProduct"), 10);
                 }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
@@ -54,7 +54,7 @@ export function Price({roundNumber}) {
                 <div style={{cursor: "pointer"}}
                      onClick={_ => {
                          setSelectedIdx(1);
-                         player.set("priceOfProduct", 15)
+                         player.set(roundID.concat("_priceOfProduct"), 15);
                      }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
