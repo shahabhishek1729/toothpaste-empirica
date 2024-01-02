@@ -12,7 +12,7 @@ export function Profile() {
     const round = useRound();
     const stage = useStage();
 
-    const score = player.get("score") || 0;
+    const score = player.get("finalScore") || 0;
 
     return (
         <div

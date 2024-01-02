@@ -61,7 +61,7 @@ function computePlayerScore(player, roundStr, warrantValue, challengeProbability
 
     const profitPerProduct = priceOfProduct - productionCost;
 
-    const currentScore = player.get("score") || 0;
+    const currentScore = player.get("finalScore") || 0;
 
     // Every additional $10 spent on a warrant shows that advertisement to one additional user.
     const numShown = warrant === 0 ? 100 : warrantValue;
@@ -106,7 +106,7 @@ function computePlayerScore(player, roundStr, warrantValue, challengeProbability
     player.set(roundStr.concat("_numShown"), numShown);
     player.set(roundStr.concat("_numBuyers"), numBuyers);
     player.set(roundStr.concat("_salesCount"), totalProfit);
-    player.set(roundStr.concat("_finalScore"), finalScore);
+    player.set("finalScore", finalScore);
     player.set(roundStr.concat("_warrant"), warrant);
     player.set(roundStr.concat("_challenged"), challenged);
 }

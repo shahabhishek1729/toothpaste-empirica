@@ -14,7 +14,7 @@ export function SalesResults({players, roundNumber}) {
     const numShown = player.get(roundStr.concat("numShown"));
     const numBuyers = player.get(roundStr.concat("numBuyers"));
     const salesCount = player.get(roundStr.concat("salesCount"));
-    const finalScore = player.get(roundStr.concat("finalScore"));
+    const finalScore = player.get("finalScore");
     const warrant = player.get(roundStr.concat("warrant"));
     const warrantChallenged = player.get(roundStr.concat("challenged"));
     const currentScore = player.get(roundStr.concat("score")) || 0;
@@ -97,14 +97,14 @@ export function SalesResults({players, roundNumber}) {
 function LeaderboardEntry(roundStr, player, players) {
     // Sort the leaderboard in descending order of final score
     players.sort((player1, player2) => {
-        return player1.get(roundStr.concat("_finalScore")) < player2.get(roundStr.concat("_finalScore")) ? 1 : 0;
+        return player1.get("finalScore") < player2.get("finalScore") ? 1 : 0;
     })
 
     return (
         <div className="mt-3 sm:mt-5 pt-20 pr-20">
             <h1 style={{fontFamily: "Futura", fontSize: "28px"}}>Leaderboard</h1>
             <h1>Net profit in market:
-                ${players.map(player_ => player_.get(roundStr.concat("finalScore"))).reduce((s, a) => s + a, 0)}</h1>
+                ${players.map(player_ => player_.get("finalScore")).reduce((s, a) => s + a, 0)}</h1>
             <table style={{border: "2px solid gray", width: "400px", height: "100px"}}>
                 <tr>
                     <th style={{borderBottom: "1px solid black", paddingLeft: "30px", fontFamily: "Avenir"}}>ID</th>
@@ -129,7 +129,7 @@ function LeaderboardEntry(roundStr, player, players) {
                             textAlign: "center",
                             paddingRight: "20px",
                             fontFamily: "Avenir"
-                        }}>{player_.get(roundStr.concat("finalScore"))}</td>
+                        }}>{player_.get("finalScore")}</td>
                     </tr>
                 )}
             </table>
