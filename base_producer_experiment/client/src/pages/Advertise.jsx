@@ -15,6 +15,7 @@ export function Advertisement({roundNumber}) {
     const roundNumberText = "round" + roundNumber;
 
     const [selectedIdx, setSelectedIdx] = useState(-1);
+    const [warrantAdded, setWarrantAdded] = useState(false);
 
     function handleChange() {
         console.log("something happened");
@@ -23,15 +24,12 @@ export function Advertisement({roundNumber}) {
     function handleSubmit() {
         console.log("Player.stage set to true");
 
-        if (player.round.get("warrant") == undefined)
-            player.round.set("warrant", 0);
-
         player.set(roundNumberText.concat("_choices"), [
             player.get("productionQuality"),
             player.round.get("advertisementQuality"),
             player.get("priceOfProduct"),
             player.get("productionCost"),
-            player.round.get("warrant"),
+            warrantAdded ? 800 : 0
         ]);
 
         player.stage.set("submit", true); //player.stage.submit();
@@ -189,7 +187,13 @@ export function Advertisement({roundNumber}) {
                 <br/>
             </div>
             <div>
-                <WarrantsSlider/>
+                <input
+                    type="checkbox"
+                    id="addWarrant"
+                    value="Warrant my advertisement"
+                    checked={warrantAdded}
+                    onChange={_ => setWarrantAdded(!warrantAdded)}
+                />
             </div>
             <ProfitMarginCalculation producerPlayer={player}/>
             <NextRoundButton on_button_click={(e) => handleSubmit(e)}/>
@@ -202,22 +206,6 @@ function NextRoundButton({on_button_click}) {
     return (
         <Button handleClick={on_button_click}> Go to market (next round) </Button>
     );
-}
-
-function WarrantsSlider() {
-    const player = usePlayer();
-
-    return <Slider
-        key={player.id}
-        value={player.round.get("warrant") || 0}
-        onChange={(num) => {
-            player.round.set("warrant", num.target.valueAsNumber);
-        }}
-        disabled={false}
-        stepSize={10}
-        min={0}
-        max={500}
-    />
 }
 
 function ProfitMarginCalculation({producerPlayer}) {
