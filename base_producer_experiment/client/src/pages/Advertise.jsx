@@ -79,14 +79,12 @@ export function Advertisement({roundNumber}) {
     // }
 
     return (
-        <div className="md:min-w-96 lg:min-w-128 xl:min-w-192 flex flex-col items-center space-y-10">
-            {NLineBreaks(24)}
-
+        <div className="md:min-w-96 lg:min-w-128 xl:min-w-192 flex flex-col items-center space-y-10 mt-10">
             <h1 style={{fontFamily: "Avenir", fontSize: "18px"}}>
                 <b>Choose how you want to advertise it.</b> All your products will be
                 advertised this way.
             </h1>
-            <p style={{fontFamily: "Avenir", width: "1000px", textAlign: "center"}}>
+            <p style={{fontFamily: "Avenir", maxWidth: "800px", textAlign: "center"}}>
                 When people are buying, they will only know the price and the advertised
                 quality. They will not know the true quality until they have bought the
                 product, by which point no returns will be accepted. You have the ability to make <em>any kind of
@@ -175,13 +173,14 @@ export function Advertisement({roundNumber}) {
             {/*</div>*/}
             {NLineBreaks(0)}
             <div className={"flex justify-center space-x-4"}>
-                <h1 style={{fontFamily: "Avenir", width: "1000px", textAlign: "center"}}>You also have the option to add
+                <h1 style={{fontFamily: "Avenir", maxWidth: "800px", textAlign: "center"}}>You also have the option to
+                    add
                     a
                     warrant to your
                     advertisement; by choosing to warrant your
                     advertisement, you are putting up ${warrantCost} claiming that the advertisement is true
                     and
-                    should be shared to a larger number of viewers (warrantValue viewers instead of 100 without a
+                    should be shared to {warrantValue} viewers (instead of 100 without a
                     warrant).
                     Anyone, including a competitor, could challenge this
                     warrant if your ad's claims are false. If the warrant is challenged and the ad is found to be false,
@@ -225,40 +224,50 @@ export function Advertisement({roundNumber}) {
                     </div>
                 </div>
             </div>
-            <ProfitMarginCalculation producerPlayer={player} warrantCost={warrantCost} warrantAdded={warrantAdded}/>
-            <NextRoundButton on_button_click={(e) => handleSubmit(e)}/>
+            <ProfitMarginCalculation producerPlayer={player} warrantAdded={warrantAdded} warrantCost={warrantCost}
+                                     warrantValue={warrantValue}/>
+            <Button handleClick={e => handleSubmit(e)}> Go to market (next round) </Button>
             <br/>
         </div>
     );
 }
 
-function NextRoundButton({on_button_click}) {
-    return (
-        <Button handleClick={on_button_click}> Go to market (next round) </Button>
-    );
-}
-
-function ProfitMarginCalculation({producerPlayer, warrantCost, warrantAdded}) {
+function ProfitMarginCalculation({producerPlayer, warrantAdded, warrantCost, warrantValue,}) {
     let profit =
         producerPlayer.get("priceOfProduct") -
         producerPlayer.get("productionCost");
-    return (
-        <div style={{width: "1000px"}}>
-            <p style={{fontFamily: "Avenir", textAlign: "center"}}>
-                You have chosen to produce{" "}
-                <b>{producerPlayer.get("productionQuality")}</b> quality
-                toothpaste and advertise it as{" "}
-                <b>{producerPlayer.round.get("advertisementQuality")}</b> quality
-                toothpaste at a{" "}
-                <b>price of ${producerPlayer.get("priceOfProduct")}</b>.
-                This gives a <b>profit of ${profit}</b> per product sold.</p>
-            {warrantAdded ? <p style={{fontFamily: "Avenir", textAlign: "center"}}>You have also put up a <b>warrant of
-                ${warrantCost}</b>, claiming that your
-                advertisement is true and should be shown
-                to <b>{~~(producerPlayer.round.get("warrant") / 5) + 100 + " "}viewers</b>.</p> : null}
+    if (warrantAdded) {
+        return (
+            <div>
+                <p style={{fontFamily: "Avenir", maxWidth: "800px", textAlign: "center"}}>
+                    You have chosen to produce{" "}
+                    <b>{producerPlayer.get("productionQuality")}</b> quality
+                    toothpaste and advertise it as{" "}
+                    <b>{producerPlayer.round.get("advertisementQuality")}</b> quality
+                    toothpaste at a{" "}
+                    <b>price of ${producerPlayer.get("priceOfProduct")}</b>.
+                    This gives a <b>profit of ${profit}</b> per product sold.
+                    You have also put up a <b>warrant of
+                    ${warrantCost}</b>, claiming that your
+                    advertisement is true and should be shown
+                    to <b>{~~(producerPlayer.round.get("warrant") / 5) + 100 + " "}viewers</b>.</p>
 
-        </div>
-    );
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <p style={{fontFamily: "Avenir", maxWidth: "800px", textAlign: "center"}}>
+                    You have chosen to produce{" "}
+                    <b>{producerPlayer.get("productionQuality")}</b> quality
+                    toothpaste and advertise it as{" "}
+                    <b>{producerPlayer.round.get("advertisementQuality") || "______"}</b> quality
+                    toothpaste at a{" "}
+                    <b>price of ${producerPlayer.get("priceOfProduct")}</b>.
+                    This gives a <b>profit of ${profit}</b> per product sold.</p>
+            </div>
+        );
+    }
 }
 
 function NLineBreaks(n) {

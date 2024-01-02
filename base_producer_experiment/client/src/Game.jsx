@@ -14,7 +14,7 @@ export function Game() {
         <div className="h-full w-full flex">
             <div className="h-full w-full flex flex-col">
                 <Profile/>
-                <div className="h-full flex items-center justify-center">
+                <div className="flex items-center justify-center">
                     <Stage/>
                 </div>
             </div>

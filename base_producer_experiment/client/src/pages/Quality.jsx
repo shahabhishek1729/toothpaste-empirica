@@ -26,7 +26,7 @@ export function Quality({roundNumber}) {
     const [selectedIdx, setSelectedIdx] = useState(-1);
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center" style={{marginTop: "20px"}}>
             <h1 style={{fontSize: "38px", fontStyle: "bold", fontFamily: "Futura"}}>Choose Quality</h1>
             <p style={{fontFamily: "Avenir", fontSize: "20px", marginTop: "20px"}}>You are a producer of toothpaste, and
                 you may choose

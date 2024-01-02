@@ -17,7 +17,6 @@ export function SalesResults({players, roundNumber}) {
     const finalScore = player.get("finalScore");
     const warrant = player.get(roundStr.concat("warrant"));
     const warrantChallenged = player.get(roundStr.concat("challenged"));
-    const currentScore = player.get(roundStr.concat("score")) || 0;
 
     // Display the toothpaste quality the user chose to produce
     let imageUrl = "";
@@ -78,7 +77,7 @@ export function SalesResults({players, roundNumber}) {
                             ${salesCount + warrant} - ${warrant} = ${salesCount} points this round.</p> : null}
                     </p><br/>
                     <p style={{fontFamily: "Avenir"}}> Your score for this round is: {salesCount} </p>
-                    <p style={{fontFamily: "Avenir"}}> Your total score is: {salesCount + currentScore} </p><br/>
+                    <p style={{fontFamily: "Avenir"}}> Your total score is: {finalScore} </p><br/>
                     <p style={{fontFamily: "Avenir"}}>
                         Click to proceed to the next round to sell products in this marketplace.
                     </p>
