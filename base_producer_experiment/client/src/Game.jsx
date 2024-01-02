@@ -1,29 +1,29 @@
-import { Chat, useGame } from "@empirica/core/player/classic/react";
+import {Chat, useGame} from "@empirica/core/player/classic/react";
 
 import React from "react";
-import { Profile } from "./Profile";
-import { Stage } from "./Stage";
+import {Profile} from "./Profile";
+import {Stage} from "./Stage";
 
 export function Game() {
-  const game = useGame();
-  const { playerCount } = game.get("treatment");
+    const game = useGame();
+    const {playerCount} = game.get("treatment");
 
-  console.log("Beginning game");
+    console.log("Beginning game");
 
-  return (
-    <div className="h-full w-full flex">
-      <div className="h-full w-full flex flex-col">
-        <Profile />
-        <div className="h-full flex items-center justify-center">
-          <Stage />
+    return (
+        <div className="h-full w-full flex">
+            <div className="h-full w-full flex flex-col">
+                <Profile/>
+                <div className="h-full flex items-center justify-center">
+                    <Stage/>
+                </div>
+            </div>
+
+            {playerCount > 1 && (
+                <div className="h-full w-128 border-l flex justify-center items-center">
+                    <Chat scope={game} attribute="chat"/>
+                </div>
+            )}
         </div>
-      </div>
-
-      {playerCount > 1 && (
-        <div className="h-full w-128 border-l flex justify-center items-center">
-          <Chat scope={game} attribute="chat" />
-        </div>
-      )}
-    </div>
-  );
+    );
 }

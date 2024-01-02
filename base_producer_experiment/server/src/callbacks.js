@@ -44,11 +44,15 @@ function randFromRange(min, max) {
 
 /**
  * Computes the score for a single player after completing a round
- * @param {Player} player     The player for which to compute scores
- * @param {string} roundStr   A string representing the current round number, e.g., "round1"
- * @return {undefined}        Score elements are set directly on the player object in Empirica, and so nothing is returned.
+ * @param {Player} player                The player for which to compute scores
+ * @param {string} roundStr              A string representing the current round number, e.g., "round1"
+ * @param {number} warrantValue          How many viewers a warranted advertisement is shown to
+ * @param {number} challengeProbability  The probability that a warrant is challenged (from 0 to 1)
+ *
+ * @return {undefined}                   Score elements are set directly on the player object in Empirica, and so
+ *                                       nothing is returned.
  */
-function computePlayerScore(player, roundStr) {
+function computePlayerScore(player, roundStr, warrantValue, challengeProbability) {
     const productionQuality = player.get(roundStr.concat("_choices"))[0]
     const advertisementQuality = player.get(roundStr.concat("_choices"))[1]
     const priceOfProduct = player.get(roundStr.concat("_choices"))[2];
@@ -60,27 +64,36 @@ function computePlayerScore(player, roundStr) {
     const currentScore = player.get("score") || 0;
 
     // Every additional $10 spent on a warrant shows that advertisement to one additional user.
-    const numExtra = ~~(warrant / 3);
-    const numShown = 100 + numExtra;
+    const numShown = warrant === 0 ? 100 : warrantValue;
 
     // Initially, anywhere from no one to everyone the ad was shown to may purchase the product.
-    let minBuyers, maxBuyers = numShown;
+    let minBuyers = warrant === 0 ? 0 : 100;
+    let maxBuyers = numShown;
+    console.log(`Originally, there were from ${minBuyers} to ${maxBuyers} potential buyers`)
 
-    // advertisementQuality must always be a string, so we'll check for strict equality (===)
-    // priceOfProduct may be stored as string or int, so we'll only check for loose equality (==)
-    if (advertisementQuality === "high")
-        minBuyers = priceOfProduct == 10 ? 70 : 50;
-    else {
-        minBuyers = priceOfProduct == 10 ? 50 : 10;
-        maxBuyers = ~~(numShown * (priceOfProduct == 10 ? 0.8 : 0.2));
+    if (priceOfProduct === 15) {
+        // If the product is charged at a high price, there will be 30% fewer potential buyers.
+        // If the product is advertised as low quality but sold at a high price, there will be 90% fewer buyers.
+        const multiplier = advertisementQuality === "high" ? 0.7 : 0.1;
+        minBuyers = ~~(minBuyers * multiplier);
+        maxBuyers = ~~(maxBuyers * multiplier);
     }
 
-    const challenged = advertisementQuality !== productionQuality;
+    console.log(`Factoring in the price, there were from ${minBuyers} to ${maxBuyers} potential buyers`)
 
-    if (challenged) {
-        minBuyers = ~~(minBuyers * 0.3);
-        maxBuyers = ~~(minBuyers * 0.3);
+    // Simulates a 70% chance of a warrant being challenged
+    const randomNumber = Math.random();
+    console.log(`Random number was ${randomNumber}`);
+    const challenged = warrant > 0 && randomNumber <= challengeProbability;
+
+    if (challenged && productionQuality !== advertisementQuality) {
+        // The ad was challenged and found to be false; reset the minBuyers and maxBuyers values as if the producer had
+        // never purchased a warrant.
+        minBuyers = 0;
+        maxBuyers = 100;
     }
+
+    console.log(`There were from ${minBuyers} to ${maxBuyers} potential buyers`)
 
     const numBuyers = randFromRange(minBuyers, maxBuyers);
     const totalProfit = profitPerProduct * numBuyers - warrant;
@@ -102,13 +115,16 @@ Empirica.onStageEnded(({stage}) => {
     if (!stage.round.get("task").startsWith("advertise")) return;
 
     const players = stage.currentGame.players;
+    const {warrantValue, challengeProbability} = stage.currentGame.get("treatment")
+    console.log(`The warrant value was ${warrantValue}`);
+    console.log(`The challenge prob was ${challengeProbability}`);
 
     const stageNumStr = stage.round.get("task").replace("advertise", "");
     const roundNum = stageNumStr === "" ? 1 : parseInt(stageNumStr)
     const roundNumberText = 'round' + roundNum;
 
     for (const player of players)
-        computePlayerScore(player, roundNumberText);
+        computePlayerScore(player, roundNumberText, warrantValue, challengeProbability);
 });
 
 Empirica.onRoundEnded(({round}) => {

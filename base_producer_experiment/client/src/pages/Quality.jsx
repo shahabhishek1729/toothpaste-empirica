@@ -31,18 +31,16 @@ export function Quality({roundNumber}) {
             <p style={{fontFamily: "Avenir", fontSize: "20px", marginTop: "20px"}}>You are a producer of toothpaste, and
                 you may choose
                 what quality you would like to produce.</p>
-            <div className="container"
-                 style={{
-                     display: "flex",
-                     justifyContent: "space-around",
-                     alignItems: "center",
-                     margin: "20px",
-                     marginTop: "50px"
-                 }}>
-                <div className="option" style={{cursor: "pointer"}} onClick={_ => {
+            <div style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                margin: "20px",
+                marginTop: "50px"
+            }}>
+                <div style={{cursor: "pointer"}} onClick={_ => {
                     setSelectedIdx(0);
                     chooseLowQuality();
-                    // handleSubmit();
                 }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
@@ -67,7 +65,11 @@ export function Quality({roundNumber}) {
                         style={{width: "350px"}}
                         src="/images/toothpastestandard.jpg" alt="Low quality toothpaste"/>
                 </div>
-                <div className="option" style={{cursor: "pointer"}}>
+                <div style={{cursor: "pointer"}}
+                     onClick={_ => {
+                         setSelectedIdx(1);
+                         chooseHighQuality();
+                     }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#00CDBB",
@@ -80,9 +82,6 @@ export function Quality({roundNumber}) {
                         fontSize: "16px",
                         marginLeft: "10px",
                         width: "370px"
-                    }} onClick={_ => {
-                        setSelectedIdx(1);
-                        chooseHighQuality();
                     }}>
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>Produce High
                             Quality</h2>

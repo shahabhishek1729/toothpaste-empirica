@@ -30,7 +30,7 @@ export function SalesResults({players, roundNumber}) {
     function handleSubmit() {
         console.log('Moving on from results round');
         player.stage.set("submit", true);
-        player.set("score", finalScore);
+        player.set(roundStr.concat("score"), finalScore);
     }
 
     return (
@@ -47,11 +47,20 @@ export function SalesResults({players, roundNumber}) {
                     <p style={{fontFamily: "Avenir"}}>
                         You chose to advertise it as a <b>{advertisementQuality}</b> quality product.
                         You sold it at a price of <b>${priceOfProduct}</b>.
-                        You also put a <b>${warrant}</b> warrant behind your ad to show it to more users.
+                        {warrant > 0 ?
+                            <p style={{fontFamily: "Avenir"}}>You also put a <b>${warrant}</b> warrant behind your ad to
+                                show it to more users.</p> : null}
 
-                        {warrantChallenged ?
+                        {warrantChallenged && productionQuality !== advertisementQuality ?
                             <p style={{fontFamily: "Avenir"}}>However, your warrant was <b>challenged</b>, and your ad
-                                was found to be misleading!
+                                was found to be misleading! As a penalty, your warrant was <b>revoked</b> and the money
+                                you
+                                spent on it was lost.
+                            </p> : null}
+
+                        {warrantChallenged && productionQuality === advertisementQuality ?
+                            <p style={{fontFamily: "Avenir"}}>Your warrant was <b>challenged</b>, but your ad
+                                was found to be honest, so no additional actions were taken.
                             </p> : null}
 
                         <br/> <br/>
@@ -64,8 +73,9 @@ export function SalesResults({players, roundNumber}) {
                     </p>
                     <p style={{fontFamily: "Avenir"}}>
                         You earned ${priceOfProduct - productionCost} per product x {numBuyers} units sold
-                        = {salesCount + warrant} points in sales. Factoring in the cost of your ad warrant, you earned
-                        ${salesCount + warrant} - ${warrant} = ${salesCount} points this round.
+                        = {salesCount + warrant} points in sales. {warrant > 0 ?
+                        <p style={{fontFamily: "Avenir"}}>Factoring in the cost of your ad warrant, you earned
+                            ${salesCount + warrant} - ${warrant} = ${salesCount} points this round.</p> : null}
                     </p><br/>
                     <p style={{fontFamily: "Avenir"}}> Your score for this round is: {salesCount} </p>
                     <p style={{fontFamily: "Avenir"}}> Your total score is: {salesCount + currentScore} </p><br/>

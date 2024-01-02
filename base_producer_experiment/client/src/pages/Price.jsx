@@ -19,14 +19,13 @@ export function Price({roundNumber}) {
             <h1 style={{fontSize: "38px", fontStyle: "bold", fontFamily: "Futura"}}>Choose Price</h1>
             <p style={{fontFamily: "Avenir", fontSize: "20px", marginTop: "20px"}}>How much would you like to sell a
                 single tube of toothpaste for?</p>
-            <div className="container"
-                 style={{
-                     display: "flex",
-                     justifyContent: "space-around",
-                     alignItems: "center",
-                     margin: "20px",
-                     marginTop: "50px"
-                 }}>
+            <div style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                margin: "20px",
+                marginTop: "50px"
+            }}>
                 <div className="option" style={{cursor: "pointer"}} onClick={_ => {
                     setSelectedIdx(0);
                     player.set("priceOfProduct", 10);
@@ -52,7 +51,11 @@ export function Price({roundNumber}) {
                         style={{width: "350px"}}
                         src="/images/toothpastestandard.jpg" alt="Low quality toothpaste"/>
                 </div>
-                <div className="option" style={{cursor: "pointer"}}>
+                <div style={{cursor: "pointer"}}
+                     onClick={_ => {
+                         setSelectedIdx(1);
+                         player.set("priceOfProduct", 15)
+                     }}>
                     <div className="option" style={{
                         textAlign: "center", padding: "20px",
                         backgroundColor: "#00CDBB",
@@ -65,9 +68,6 @@ export function Price({roundNumber}) {
                         fontSize: "16px",
                         marginLeft: "10px",
                         width: "370px"
-                    }} onClick={_ => {
-                        setSelectedIdx(1);
-                        player.set("priceOfProduct", 15)
                     }}>
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>
                             Sell for $15</h2>

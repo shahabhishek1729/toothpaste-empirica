@@ -1,5 +1,5 @@
 import {
-    Slider,
+    Slider, useGame,
     usePlayer,
     usePlayers,
     useStage,
@@ -10,9 +10,12 @@ import "@empirica/core/player/classic/react";
 
 export function Advertisement({roundNumber}) {
     const player = usePlayer();
-    const players = usePlayers();
-    const stage = useStage();
     const roundNumberText = "round" + roundNumber;
+    const game = useGame();
+
+    const {warrantCost, warrantValue} = game.get("treatment");
+    console.log(`The warrant cost was ${warrantCost}`)
+    console.log(`The warrant value was ${warrantValue}`)
 
     const [selectedIdx, setSelectedIdx] = useState(-1);
     const [warrantAdded, setWarrantAdded] = useState(false);
@@ -29,7 +32,7 @@ export function Advertisement({roundNumber}) {
             player.round.get("advertisementQuality"),
             player.get("priceOfProduct"),
             player.get("productionCost"),
-            warrantAdded ? 800 : 0
+            warrantAdded ? warrantCost : 0
         ]);
 
         player.stage.set("submit", true); //player.stage.submit();
@@ -83,16 +86,15 @@ export function Advertisement({roundNumber}) {
                 <b>Choose how you want to advertise it.</b> All your products will be
                 advertised this way.
             </h1>
-            <p style={{fontFamily: "Avenir", width: "800px", textAlign: "center"}}>
+            <p style={{fontFamily: "Avenir", width: "1000px", textAlign: "center"}}>
                 When people are buying, they will only know the price and the advertised
                 quality. They will not know the true quality until they have bought the
                 product, by which point no returns will be accepted. You have the ability to make <em>any kind of
                 advertisement</em> about your product in order to maximize your sales.
             </p>
-            <p style={{fontFamily: "Avenir"}}>
-                Your current choice is to advertise your product as:{" "}
-                <b>{player.round.get("advertisementQuality")} </b> quality toothspaste.
-            </p>
+            {player.round.get("advertisementQuality") ?
+                <p style={{fontFamily: "Avenir"}}>Your current choice is to advertise your product as:{" "}
+                    <b>{player.round.get("advertisementQuality")} </b> quality toothpaste.</p> : null}
 
             <div className="container"
                  style={{
@@ -120,10 +122,9 @@ export function Advertisement({roundNumber}) {
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>Advertise as Low
                             Quality</h2>
                         <p style={{fontWeight: "normal", fontFamily: "Avenir"}}>This ad will be shown
-                            to <b>{~~(player.round.get("warrant" || 0) / 5) + 100 + " "}
+                            to <b>{(warrantAdded ? warrantValue : 100) + " "}
                                 viewers</b>,
-                            of which a subset may decide to buy your product. You can increase this number by increasing
-                            the warrant you place on this advertisement (see below).</p>
+                            of which a subset may decide to buy your product.</p>
                     </div>
                     <img
                         style={{width: "350px"}}
@@ -148,10 +149,9 @@ export function Advertisement({roundNumber}) {
                         <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>Advertise as High
                             Quality</h2>
                         <p style={{fontWeight: "normal", fontFamily: "Avenir"}}>This ad will be shown
-                            to <b>{~~(player.round.get("warrant" || 0) / 5) + 100 + " "}
+                            to <b>{(warrantAdded ? warrantValue : 100) + " "}
                                 viewers</b>,
-                            of which a subset may decide to buy your product. You can increase this number by increasing
-                            the warrant you place on this advertisement (see below).</p>
+                            of which a subset may decide to buy your product.</p>
                     </div>
                     <img
                         style={{width: "350px"}}
@@ -175,27 +175,57 @@ export function Advertisement({roundNumber}) {
             {/*</div>*/}
             {NLineBreaks(0)}
             <div className={"flex justify-center space-x-4"}>
-                <h1 style={{fontFamily: "Avenir", width: "800px", textAlign: "center"}}>You also have the option to add
+                <h1 style={{fontFamily: "Avenir", width: "1000px", textAlign: "center"}}>You also have the option to add
                     a
                     warrant to your
                     advertisement; by choosing to warrant your
-                    advertisement, you are putting up a certain amount of money claiming that the advertisement is true
+                    advertisement, you are putting up ${warrantCost} claiming that the advertisement is true
                     and
-                    should be shared to a larger number of viewers (every <b>$5</b> you spend shares the ad to one more
-                    viewer). Anyone, including a competitor, could challenge the
-                    warrant if your ad's claims are false.</h1>
+                    should be shared to a larger number of viewers (warrantValue viewers instead of 100 without a
+                    warrant).
+                    Anyone, including a competitor, could challenge this
+                    warrant if your ad's claims are false. If the warrant is challenged and the ad is found to be false,
+                    the warrant will be revoked and the money spent on it will be lost.</h1>
                 <br/>
             </div>
             <div>
-                <input
-                    type="checkbox"
-                    id="addWarrant"
-                    value="Warrant my advertisement"
-                    checked={warrantAdded}
-                    onChange={_ => setWarrantAdded(!warrantAdded)}
-                />
+                <div className="container" style={{
+                    cursor: "pointer",
+                    paddingLeft: "20px",
+                    paddingRight: "20px",
+                    paddingBottom: "20px",
+                    paddingTop: "5px",
+                    outline: warrantAdded ? "3px solid #6688FF" : "1px solid #AAAAAA",
+                    outlineOffset: "3px",
+                    borderRadius: "15px",
+                }} onClick={_ => setWarrantAdded(!warrantAdded)}>
+                    <input
+                        style={{
+                            borderRadius: "999px",
+                            cursor: "pointer"
+                        }}
+                        type="checkbox"
+                        id="addWarrant"
+                        checked={warrantAdded}
+                        readOnly={true}
+                    />
+                    <div className="option" style={{
+                        textAlign: "center",
+                        color: "#000",
+                        fontSize: "16px",
+                        marginRight: "10px",
+                        width: "370px",
+                    }}>
+                        <h2 style={{fontWeight: "bold", fontFamily: "Avenir", fontSize: "24px"}}>
+                            Warrant my Advertisement</h2>
+                        <p style={{fontWeight: "normal", fontFamily: "Avenir"}}>This will cost
+                            you <b>${warrantCost}</b>, but if
+                            selected, this ad will be shown
+                            to <b>{warrantValue} viewers</b>, as opposed to 100 viewers without a warrant.</p>
+                    </div>
+                </div>
             </div>
-            <ProfitMarginCalculation producerPlayer={player}/>
+            <ProfitMarginCalculation producerPlayer={player} warrantCost={warrantCost} warrantAdded={warrantAdded}/>
             <NextRoundButton on_button_click={(e) => handleSubmit(e)}/>
             <br/>
         </div>
@@ -208,12 +238,12 @@ function NextRoundButton({on_button_click}) {
     );
 }
 
-function ProfitMarginCalculation({producerPlayer}) {
+function ProfitMarginCalculation({producerPlayer, warrantCost, warrantAdded}) {
     let profit =
         producerPlayer.get("priceOfProduct") -
         producerPlayer.get("productionCost");
     return (
-        <div style={{width: "800px"}}>
+        <div style={{width: "1000px"}}>
             <p style={{fontFamily: "Avenir", textAlign: "center"}}>
                 You have chosen to produce{" "}
                 <b>{producerPlayer.get("productionQuality")}</b> quality
@@ -221,11 +251,12 @@ function ProfitMarginCalculation({producerPlayer}) {
                 <b>{producerPlayer.round.get("advertisementQuality")}</b> quality
                 toothpaste at a{" "}
                 <b>price of ${producerPlayer.get("priceOfProduct")}</b>.
-                This gives a <b>profit of ${profit}</b> per product sold. You have also put up a <b>warrant of
-                ${producerPlayer.round.get("warrant")}</b>, claiming that your
+                This gives a <b>profit of ${profit}</b> per product sold.</p>
+            {warrantAdded ? <p style={{fontFamily: "Avenir", textAlign: "center"}}>You have also put up a <b>warrant of
+                ${warrantCost}</b>, claiming that your
                 advertisement is true and should be shown
-                to <b>{~~(producerPlayer.round.get("warrant") / 5) + 100 + " "} viewers</b>.
-            </p>
+                to <b>{~~(producerPlayer.round.get("warrant") / 5) + 100 + " "}viewers</b>.</p> : null}
+
         </div>
     );
 }
