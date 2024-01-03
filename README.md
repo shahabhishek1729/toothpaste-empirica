@@ -11,7 +11,12 @@ function computePlayerScore(player, roundStr, warrantValue, challengeProbability
 * Added a synced leaderboard to the Results page, so that users can see how the market is doing after a certain round.
 * Built a basic admin dashboard in `Admin Dashboard.ipynb` to track and visualize users' decisions over the rounds of an experiment
 * Restructured the UI of the experimenmt and broke up the user's decisions into three pages, with page 1 comprising production quality decisions, page 2 involving the selling price, and the third page offering advertisement-related options.
-* Basic code refactoring (extracted functions for repeated tasks and added documentation in some instances)
+* Basic code refactoring (extracted functions for repeated tasks and added documentation in some instances). For instances, the following function was extracted from `Advertisements.jsx`:
+```js
+function NLineBreaks(n) {
+    return [...Array(n).keys()].map(item => <br/>)
+}
+```
 
 ## Short Answer Responses
 **Short Answer (500 words)**: Discuss how you would plan the feature including any designs, references, links to resources you’ve used to determine the best way to develop such a feature.
