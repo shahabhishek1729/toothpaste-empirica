@@ -19,8 +19,12 @@ function NLineBreaks(n) {
 ```
 
 ## Short Answer Responses
-**Short Answer (500 words)**: Discuss how you would plan the feature including any designs, references, links to resources you’ve used to determine the best way to develop such a feature.
+**Short Answer (500 words)**: *Discuss how you would plan the feature including any designs, references, links to resources you’ve used to determine the best way to develop such a feature.*<br/>
+```
 Here is my answer to question #1.
+```
 
-**Short Answer (500 words)**: Discuss why this feature is reflective of a real-world marketplace and what kind of trade-offs you would want to consider to make this feature easy for users to employ.
+**Short Answer (500 words)**: *Discuss why this feature is reflective of a real-world marketplace and what kind of trade-offs you would want to consider to make this feature easy for users to employ.*<br/>
+```
 Here is my answer to question #2.
+```
