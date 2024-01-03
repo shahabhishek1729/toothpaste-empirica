@@ -10,3 +10,9 @@ This repository contains my implementation of the core task and three bonuses in
 * Restructured the UI of the experimenmt and broke up the user's decisions into three pages, with page 1 comprising production quality decisions, page 2 involving the selling price, and the third page offering advertisement-related options.
 * Basic code refactoring (extracted functions for repeated tasks and added documentation in some instances)
 
+## Short Ansewr Responses
+**Short Answer (500 words)**: Discuss how you would plan the feature including any designs, references, links to resources you’ve used to determine the best way to develop such a feature.
+Here is my answer to question #1.
+
+**Short Answer (500 words)**: Discuss why this feature is reflective of a real-world marketplace and what kind of trade-offs you would want to consider to make this feature easy for users to employ.
+Here is my answer to question #2.
