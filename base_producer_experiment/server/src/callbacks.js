@@ -28,7 +28,7 @@ Empirica.onGameStart(({game}) => {
             name: "Results",
             task: `results${i > 0 ? i + 1 : ''}`,
         });
-        round_i_4.addStage({name: "Result", duration: 3600});
+        round_i_4.addStage({name: "Result", duration: 120});
     }
 });
 
