@@ -76,7 +76,8 @@ export function Price({roundNumber}) {
                 </div>
             </div>
 
-            <Button handleClick={handleSubmit} style={{paddingBottom: "100px"}}> Next Page →</Button>
+            <Button handleClick={handleSubmit} style={{paddingBottom: "100px", marginBottom: "100px"}}> Next Page
+                →</Button>
         </div>
     );
 }

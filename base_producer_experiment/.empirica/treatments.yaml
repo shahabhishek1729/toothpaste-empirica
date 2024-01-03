@@ -37,17 +37,17 @@ treatments:
         playerCount: 1
         warrantCost: 1000
         warrantValue: 2000
-    - name: Multi Player
-      desc: Three-player Game
-      factors:
-        challengeProbability: 0.7
-        playerCount: 5
-        warrantCost: 1000
-        warrantValue: 2000
     - name: Two Players
       desc: Two-player Game
       factors:
         challengeProbability: 0.7
         playerCount: 2
+        warrantCost: 1000
+        warrantValue: 2000
+    - name: Multi Player
+      desc: Three-player Game
+      factors:
+        challengeProbability: 0.7
+        playerCount: 3
         warrantCost: 1000
         warrantValue: 2000

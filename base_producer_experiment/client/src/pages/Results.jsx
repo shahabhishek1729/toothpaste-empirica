@@ -100,7 +100,7 @@ export function SalesResults({players, roundNumber}) {
 function LeaderboardEntry(roundStr, player, players) {
     // Sort the leaderboard in descending order of final score
     players.sort((player1, player2) => {
-        return player1.get(roundStr.concat("_finalScore")) < player2.get(roundStr.concat("_finalScore")) ? 1 : 0;
+        return player1.get(roundStr.concat("salesCount")) < player2.get(roundStr.concat("salesCount")) ? 1 : -1;
     })
 
     return (
