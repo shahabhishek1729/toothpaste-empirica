@@ -31,7 +31,7 @@ To determine the ideal values of V, and W, I set out with two goals in mind:
 1. Producers with honest ads should have as little chance of being penalized for warranting their ads as possible.
 2. Producers with dishonest ads should fare worse than producers being honest. More specifically, a dishonest producer is defined as one that manufactures low-quality toothpaste, yet markets high-quality toothpaste to consumers. Although there is another possiblitiy (making high-quality toothpaste yet marketing low-quality toothpaste), this is less likely and is penalized by default, so it won't be considered below.
 
-After simulating multiple possible values for $V$ and $W$, I settled on the following: a warrant should cost $1000$ dollars, and should spread the ad to $2000$ users. However, I also added these parameters as factors in the Empirica `treatments.yaml` file, so that experiment administrators can change them to observe the effects of different rewards/penalties. My tests can be found at [this Desmos page](https://www.desmos.com/calculator/dwritdzgxv).
+After simulating multiple possible values for $V$ and $W$, I settled on the following: a warrant should cost $1000$ dollars, and should spread the ad to $2000$ users. However, I also added these parameters as factors in the Empirica `treatments.yaml` file, so that experiment administrators can change them to observe the effects of different rewards/penalties. My tests can be found at [this Desmos page](https://www.desmos.com/calculator/3pqruvoplp).
 
 Resources:<br>
 [Empirica Docs](https://docs.empirica.ly/tutorials/beginner-experiment-prisoners-dilemma)<br>
